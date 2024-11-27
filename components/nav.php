@@ -30,8 +30,8 @@ $users_quyen = $users['phanquyen'];
         }
 
         #sidebar {
-            min-width: 250px;
-            max-width: 250px;
+            min-width: 175px;
+            max-width: 175px;
             min-height: 100vh;
             background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
             color: white;
@@ -130,28 +130,28 @@ $users_quyen = $users['phanquyen'];
     <header class="header">
         <!-- Sidebar -->
         <div class="d-flex">
-            <nav id="sidebar">
+            <nav id="sidebar" class="position-fixed vh-100 bg-dark text-white">
                 <div class="position-sticky pt-3">
-                    <div class="px-4 py-3">
-                        <h3 class="text-white">WorkFlow Pro</h3>
+                    <div class="px-2 py-4">
+                        <h3 class="text-white fs-5">SHOOSE STORE</h3>
                     </div>
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">
+                            <a class="nav-link active" href="./home.php">
                                 <i class="fas fa-home me-2"></i>Trang Chủ
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-project-diagram me-2"></i>Dự Án
+                            <a class="nav-link" href="./shop.php?danhmuc=">
+                                <i class="fas fa-store me-2"></i>Cửa hàng
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-tasks me-2"></i>Nhiệm Vụ
+                            <a class="nav-link" href="./donhang.php">
+                                <i class="fas fa-box me-2"></i>Đơn hàng đã mua
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link" href="#">
                                 <i class="fas fa-chart-bar me-2"></i>Báo Cáo
                             </a>
@@ -165,7 +165,7 @@ $users_quyen = $users['phanquyen'];
                             <a class="nav-link" href="#">
                                 <i class="fas fa-cog me-2"></i>Cài Đặt
                             </a>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
             </nav>
@@ -205,16 +205,14 @@ $users_quyen = $users['phanquyen'];
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-3 col-md-3">
-                            <div class="header__logo">
-                                <a href="./index.php">SHOPQUANAO</a>
-                            </div>
+                            
                         </div>
                         <div class="col-lg-6 col-md-6">
                             <nav class="header__menu mobile-menu">
                                 <ul>
-                                    <li class="active"><a href="./index.php">Trang chủ</a></li>
-                                    <li><a href="./shop.php?danhmuc=">Cửa hàng</a></li>
-                                    <li><a href="./donhang.php">Đơn hàng đã mua</a></li>
+                                    <!-- <li class="active"><a href="./index.php"><i class="fas fa-home me-2"></i>Trang chủ</a></li> -->
+                                    <!-- <li><a href="./shop.php?danhmuc=">Cửa hàng</a></li> -->
+                                    <!-- <li><a href="./donhang.php">Đơn hàng đã mua</a></li> -->
                                 </ul>
                             </nav>
                         </div>
@@ -252,3 +250,23 @@ $users_quyen = $users['phanquyen'];
 
         </div>
     </header>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var sidebar = document.getElementById('sidebar');
+            var sidebarCollapse = document.getElementById('sidebarCollapse');
+            
+            sidebarCollapse.addEventListener('click', function() {
+                sidebar.classList.toggle('active');
+            });
+
+            // Initialize tooltips
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            });
+        });
+    </script>
+</body>

@@ -7,7 +7,7 @@ $email = $_SESSION["user"];
 ?>
 
 
-<div style="padding-top:50px">
+<div style="padding-top:50px" class="container">
     <div class="content-page">
         <div class="container-fluid">
             <div class="row">
