@@ -93,7 +93,7 @@ if (isset($_SESSION["user"])) {
         }
 
         .login {
-            height: 460px;
+            height: 700px;
             background: #eee;
             border-radius: 60% / 10%;
             transform: translateY(-180px);
@@ -107,7 +107,7 @@ if (isset($_SESSION["user"])) {
         }
 
         #chk:checked~.login {
-            transform: translateY(-500px);
+            transform: translateY(-580px);
         }
 
         #chk:checked~.login label {
@@ -312,8 +312,8 @@ if (isset($_SESSION["user"])) {
         <div class="login">
             <form action="#" class="sign-in-form" method="POST">
                 <label class="title" for="chk" aria-hidden="true">Đăng nhập</label>
-                <input type="email" name="email" placeholder="Email" required="">
-                <input type="password" name="password" placeholder="Password" required="">
+                <input type="email" name="email" placeholder="VD: hoanghau@gmail.com" required="">
+                <input type="password" name="password" placeholder="admin123" required="">
                 <button type="submit" name="login">Đăng nhập </button>
             </form>
         </div>
