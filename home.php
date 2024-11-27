@@ -1,7 +1,9 @@
 <?php
   require_once('./config/database.php');
+  require_once('./config/variable.php');
   include_once('./components/header.php');
   include_once('./components/nav.php');
+
    
 ?>
 
