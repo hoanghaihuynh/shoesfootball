@@ -301,9 +301,11 @@ if (isset($_SESSION["user"])) {
                 <label class="lbl_input" for="passReg">Mật khẩu</label>
                 <input type="password" id="passReg" name="passReg" placeholder="messba" required="">
 
+                <!-- Nhập lại mật khẩu -->
                 <label for="confirmPassword" class="lbl_input">Nhập lại mật khẩu</label>
-                <input id="confirmPassword" type="password" placeholder="Nhập lại mật khẩu" class="form-control" required>
+                <input id="confirmPassword" name="confirmPassword" type="password" placeholder="Nhập lại mật khẩu" class="form-control" required>
                 <div class="form-message" id="passwordError"></div>
+
 
                 <button type="submit" name="reg">Đăng ký</button>
             </form>
@@ -327,29 +329,32 @@ if (isset($_POST['reg'])) {
     $namep = $_POST['name'];
     $emailq = $_POST['emailReg'];
     $passs  = $_POST['passReg'];
-    // Kiểm tra username hoặc email trong CSDL có trùng không
-    if ($namep != "" && $emailq != "" && $passs != "") {
+    $confirmPass = $_POST['confirmPassword'];
+
+    // Kiểm tra mật khẩu khớp nhau
+    if ($passs !== $confirmPass) {
+        echo '<script>alert("Mật khẩu không khớp!");</script>';
+    } else if ($namep != "" && $emailq != "" && $passs != "") {
         $sqle = "SELECT * FROM user WHERE `email` = '$emailq'";
         $query_rune = $conn->query($sqle);
 
         if ($query_rune->fetch(PDO::FETCH_ASSOC)) {
             echo '<script>alert("Email Đã Tồn Tại!")</script>';
         } else {
-            //nếu không trùng thì đk nick mới
+            // Nếu không trùng thì đăng ký tài khoản mới
             $sql = "INSERT IGNORE INTO user (name,email,password,phanquyen) VALUES ('$namep','$emailq','$passs','0')";
             if ($conn->query($sql)) {
                 $_SESSION["user"] = $emailq;
                 echo '<script>alert("Bạn Đã Đăng Ký Thành Công!");window.location = "home.php"</script>';
             } else {
                 echo '<script>alert("Bạn Đã Đăng Ký Thất Bại!");</script>';
-                header('location: #');
             }
         }
     } else {
         echo '<script>alert("Không Được Để Trống!");</script>';
     }
-
 }
+
 
 if (isset($_POST['login'])) {
     $emailq      = $_POST['email'];
