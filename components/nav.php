@@ -141,31 +141,28 @@ $users_quyen = $users['phanquyen'];
                                 <i class="fas fa-home me-2"></i>Trang Chủ
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./shop.php?danhmuc=">
+                        <!-- Dropdown for Cửa hàng -->
+                        <li class="nav-item dropend">
+                            <a
+                                class="nav-link dropdown-toggle"
+                                href="#"
+                                id="shopDropdown"
+                                role="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false">
                                 <i class="fas fa-store me-2"></i>Cửa hàng
                             </a>
+                            <ul class="dropdown-menu bg-dark text-white border-0" aria-labelledby="shopDropdown">
+                                <li><a class="dropdown-item text-white">Bán chạy nhất</a></li>
+                                <li><a class="dropdown-item text-white">Sản phẩm mới</a></li>
+                                <li><a class="dropdown-item text-white">Giảm giá sốc</a></li>
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="./donhang.php">
-                                <i class="fas fa-box me-2"></i>Đơn hàng đã mua
+                                <i class="fas fa-box me-2"></i>Đơn hàng
                             </a>
                         </li>
-                        <!-- <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-chart-bar me-2"></i>Báo Cáo
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-users me-2"></i>Nhóm
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-cog me-2"></i>Cài Đặt
-                            </a>
-                        </li> -->
                     </ul>
                 </div>
             </nav>
@@ -179,22 +176,33 @@ $users_quyen = $users['phanquyen'];
                                     <button type="button" id="sidebarCollapse" class="btn btn-danger btn-sm me-2">
                                         <i class="fas fa-bars"></i>
                                     </button>
-                                    <p class="mb-0 text-dark"><?php echo $site_email ?></p>
+                                    <!-- <p class="mb-0 text-dark"><?php echo $site_email ?></p> -->
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-5 text-end">
                                 <div class="header__top__right">
-                                    <div class="header__top__links text-dark">
-                                        <?php if (!isset($_SESSION["user"])) { ?>
-                                            <a href="#" class="text-decoration-none text-dark me-3">Đăng nhập</a>
-                                        <?php } ?>
-                                        <a href="#" class="text-decoration-none text-dark me-3">FAQs</a>
-                                        <?php if ($users_quyen == 99) { ?>
-                                            <a href="<?php echo $site_domain ?>/admin" class="text-decoration-none text-dark me-3">Trang Quản Trị</a>
-                                        <?php } ?>
-                                        <?php if (isset($_SESSION["user"])) { ?>
-                                            <a href="<?php echo $site_domain ?>/logout.php" class="text-decoration-none text-dark">Đăng xuất</a>
-                                        <?php } ?>
+                                    <div class="dropdown">
+                                        <button
+                                            class="btn btn-link text-dark dropdown-toggle"
+                                            type="button"
+                                            id="userMenu"
+                                            data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                            <i class="fas fa-user"></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+                                            <li><a class="dropdown-item" href="#">Site Email: <?php echo $site_email; ?></a></li>
+                                            <?php if (!isset($_SESSION["user"])) { ?>
+                                                <li><a class="dropdown-item" href="#">Đăng nhập</a></li>
+                                            <?php } ?>
+                                            <li><a class="dropdown-item" href="#">FAQs</a></li>
+                                            <?php if ($users_quyen == 99) { ?>
+                                                <li><a class="dropdown-item" href="<?php echo $site_domain ?>/admin">Trang Quản Trị</a></li>
+                                            <?php } ?>
+                                            <?php if (isset($_SESSION["user"])) { ?>
+                                                <li><a class="dropdown-item" href="<?php echo $site_domain ?>/logout.php">Đăng xuất</a></li>
+                                            <?php } ?>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -202,10 +210,11 @@ $users_quyen = $users['phanquyen'];
                     </div>
                 </div>
 
+
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-3 col-md-3">
-                            
+
                         </div>
                         <div class="col-lg-6 col-md-6">
                             <nav class="header__menu mobile-menu">
@@ -257,14 +266,14 @@ $users_quyen = $users['phanquyen'];
         document.addEventListener('DOMContentLoaded', function() {
             var sidebar = document.getElementById('sidebar');
             var sidebarCollapse = document.getElementById('sidebarCollapse');
-            
+
             sidebarCollapse.addEventListener('click', function() {
                 sidebar.classList.toggle('active');
             });
 
             // Initialize tooltips
             var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
                 return new bootstrap.Tooltip(tooltipTriggerEl)
             });
         });
