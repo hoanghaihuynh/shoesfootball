@@ -226,7 +226,7 @@ $users_quyen = $users['phanquyen'];
                                             id="userMenu"
                                             data-bs-toggle="dropdown"
                                             aria-expanded="false">
-                                            <i class="fas fa-user"></i>
+                                            <i class="fa fa-user-circle-o"></i>
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
                                             <li><a class="dropdown-item" href="#">Site Email: <?php echo $site_email; ?></a></li>
