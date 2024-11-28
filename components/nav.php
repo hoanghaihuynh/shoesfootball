@@ -234,9 +234,9 @@ $users = $result->fetch(PDO::FETCH_ASSOC);
                                                 <li><a class="dropdown-item" href="#">Đăng nhập</a></li>
                                             <?php } ?>
                                             <li><a class="dropdown-item" href="#">FAQs</a></li>
-                                            <?php if ($users_quyen == 99) { ?>
+                                            <!-- <?php if ($users_quyen == 99) { ?>
                                                 <li><a class="dropdown-item" href="<?php echo $site_domain ?>/admin">Trang Quản Trị</a></li>
-                                            <?php } ?>
+                                            <?php } ?> -->
                                             <?php if (isset($_SESSION["user"])) { ?>
                                                 <li><a class="dropdown-item" href="<?php echo $site_domain ?>/logout.php">Đăng xuất</a></li>
                                             <?php } ?>
