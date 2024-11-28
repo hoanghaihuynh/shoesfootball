@@ -85,11 +85,7 @@ $id = $_GET['updateid'];
     </div>
     <!-- container-scroller -->
     <!-- base:js -->
-    <script>
-    // Thay thế <textarea id="post_content"> với CKEditor
-    CKEDITOR.replace('chitiet');// tham số là biến name của textarea
-    CKEDITOR.replace('summary');
-</script>
+   
     <script src="../../vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
     <!-- Plugin js for this page-->
