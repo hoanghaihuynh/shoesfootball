@@ -6,9 +6,9 @@ $sqlu = "SELECT * FROM user WHERE email = '$email'";
 $result = $conn->query($sqlu);
 $users = $result->fetch(PDO::FETCH_ASSOC);
 
-$users_name = $users['name'];
-$users_money = $users['money'];
-$users_quyen = $users['phanquyen'];
+// $users_name = $users['name'];
+// $users_money = $users['money'];
+// $users_quyen = $users['phanquyen'];
 ?>
 
 <head>
