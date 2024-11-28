@@ -20,6 +20,4 @@
     <link rel="stylesheet" href="../../css/vertical-layout-light/style.css">
     <!-- endinject -->
     <link rel="shortcut icon" href="../../images/favicon.png" />
-    <script src="https://orgamicheart.com/admin/ckeditor/ckeditor.js"></script>
-
 </head>
