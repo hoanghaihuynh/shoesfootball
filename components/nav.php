@@ -92,6 +92,36 @@ $users_quyen = $users['phanquyen'];
                 margin-left: 0;
             }
         }
+
+        /* Con trỏ dạng pointer khi hover */
+        .custom-hover {
+            cursor: pointer;
+            /* Thay đổi con trỏ chuột */
+            transition: background-color 0.3s ease, opacity 0.3s ease;
+            /* Hiệu ứng mượt */
+        }
+
+        /* Hiệu ứng mờ dần nền khi hover */
+        .custom-hover:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            /* Nền mờ đi */
+            opacity: 0.8;
+            /* Độ trong suốt */
+        }
+
+        /* Đặt dropdown của "Cửa hàng" đứng trên các phần tử khác */
+        #sidebar .dropdown-menu {
+            z-index: 1050;
+            /* Đặt z-index cao để đảm bảo luôn trên các phần tử khác */
+            position: relative;
+            /* Đảm bảo vị trí menu không bị ảnh hưởng bởi phần tử cha */
+        }
+
+        /* Đảm bảo toàn bộ sidebar không ảnh hưởng tới các phần tử con */
+        #sidebar {
+            position: relative;
+            z-index: 1;
+        }
     </style>
 </head>
 
@@ -142,7 +172,7 @@ $users_quyen = $users['phanquyen'];
                             </a>
                         </li>
                         <!-- Dropdown for Cửa hàng -->
-                        <li class="nav-item dropend">
+                        <li class="nav-item dropend position-relative">
                             <a
                                 class="nav-link dropdown-toggle"
                                 href="#"
@@ -152,10 +182,16 @@ $users_quyen = $users['phanquyen'];
                                 aria-expanded="false">
                                 <i class="fas fa-store me-2"></i>Cửa hàng
                             </a>
-                            <ul class="dropdown-menu bg-dark text-white border-0" aria-labelledby="shopDropdown">
-                                <li><a class="dropdown-item text-white">Bán chạy nhất</a></li>
-                                <li><a class="dropdown-item text-white">Sản phẩm mới</a></li>
-                                <li><a class="dropdown-item text-white">Giảm giá sốc</a></li>
+                            <ul class="dropdown-menu bg-dark text-white border-0 position-absolute" aria-labelledby="shopDropdown">
+                                <li>
+                                    <a class="dropdown-item custom-hover text-white" href="./home.php?filter=best-sellers">Bán chạy nhất</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item custom-hover text-white" href="./home.php?filter=new-products">Sản phẩm mới</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item custom-hover text-white" href="./home.php?filter=discounts">Giảm giá sốc</a>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -166,6 +202,8 @@ $users_quyen = $users['phanquyen'];
                     </ul>
                 </div>
             </nav>
+
+
 
             <div id="content" class="flex-grow-1">
                 <div class="header__top bg-white shadow-sm">

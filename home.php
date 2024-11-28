@@ -12,15 +12,6 @@
 <!-- Phần sản phẩm bắt đầu -->
 <section class="product spad">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <ul class="filter__controls">
-                    <li class="active" data-filter="*">Bán chạy nhất</li>
-                    <li data-filter=".new-arrivals">Sản phẩm mới</li>
-                    <li data-filter=".hot-sales">Giảm giá sốc</li>
-                </ul>
-            </div>
-        </div>
         <div class="row product__filter">
             <?php 
                                 $query = $conn->query("SELECT * FROM `products`");
