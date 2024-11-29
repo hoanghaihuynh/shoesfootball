@@ -8,7 +8,7 @@ $users = $result->fetch(PDO::FETCH_ASSOC);
 
 // $users_name = $users['name'];
 // $users_money = $users['money'];
-// $users_quyen = $users['phanquyen'];
+$users_quyen = $users['phanquyen'];
 ?>
 
 <head>
@@ -219,24 +219,16 @@ $users = $result->fetch(PDO::FETCH_ASSOC);
                             </div>
                             <div class="col-lg-6 col-md-5 text-end">
                                 <div class="header__top__right">
+
                                     <div class="dropdown">
-                                        <button
-                                            class="btn btn-link text-dark dropdown-toggle"
-                                            type="button"
-                                            id="userMenu"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false">
-                                            <i class="fa fa-user-circle-o"></i>
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i style="font-size: 24px;" class="fa fa-user-circle-o"></i>
                                         </button>
-                                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
-                                            <li><a class="dropdown-item" href="#">Site Email: <?php echo $site_email; ?></a></li>
-                                            <?php if (!isset($_SESSION["user"])) { ?>
-                                                <li><a class="dropdown-item" href="#">Đăng nhập</a></li>
-                                            <?php } ?>
-                                            <li><a class="dropdown-item" href="#">FAQs</a></li>
-                                            <!-- <?php if ($users_quyen == 99) { ?>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#"><?php echo $site_email; ?></a></li>
+                                            <?php if ($users_quyen == 99) { ?>
                                                 <li><a class="dropdown-item" href="<?php echo $site_domain ?>/admin">Trang Quản Trị</a></li>
-                                            <?php } ?> -->
+                                            <?php } ?>
                                             <?php if (isset($_SESSION["user"])) { ?>
                                                 <li><a class="dropdown-item" href="<?php echo $site_domain ?>/logout.php">Đăng xuất</a></li>
                                             <?php } ?>
