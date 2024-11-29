@@ -269,7 +269,7 @@ move_uploaded_file($_FILES['image']['tmp_name'], $target);
     $sotiengiamgia     = $_POST['sotiengiamgia'];
      $chitiet   = $_POST['chitiet'];
     $sale      = $_POST['sale'];
-    $slhienco      = $_POST['slhienco'];
+    // $slhienco      = $_POST['slhienco'];
     $signi= $_POST['visibility'];
     $select = $_POST['subcategory_id'];
 
