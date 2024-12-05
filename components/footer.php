@@ -1,5 +1,5 @@
 <?php
-  require_once('./config/database.php');
+require_once('./config/database.php');
 
 ?>
 <footer class="footer">
@@ -10,7 +10,7 @@
                     <div class="footer__logo">
                         <a href="#">SHOPQUANAO</a>
                     </div>
-                    <p><?php echo $site_about?></p>
+                    <p><?php echo $site_about ?></p>
                     <a href="#"><img src="img/payment.png" alt=""></a>
                 </div>
             </div>
@@ -41,10 +41,10 @@
                     <!-- Single Widget -->
                     <div class="footer__newslatter">
                         <ul>
-                            <li><a href="#"><?php echo $site_diachi?></a></li>
+                            <li><a href="#"><?php echo $site_diachi ?></a></li>
 
-                            <li><a href="#"><?php echo $site_email?></a></li>
-                            <li><a href="#"><?php echo $site_phone?></a></li>
+                            <li><a href="#"><?php echo $site_email ?></a></li>
+                            <li><a href="#"><?php echo $site_phone ?></a></li>
                         </ul>
                     </div>
                 </div>
@@ -55,10 +55,10 @@
                 <div class="footer__copyright__text">
                     <p>Copyright ©
                         <script>
-                        document.write(new Date().getFullYear());
+                            document.write(new Date().getFullYear());
                         </script>
                         All rights reserved | This template is made with <i class="fa fa-heart-o"
-                            aria-hidden="true"></i> 
+                            aria-hidden="true"></i>
                     </p>
                 </div>
             </div>
@@ -73,15 +73,13 @@
         <div class="search-close-switch">+</div>
         <form action="search.php" method="GET" class="search-model-form">
             <select id="subcategories" name="subcategory_id">
-
-                <?php 
-                                $query = $conn->query("SELECT * FROM `danhmuc`");
-                                while($row1 = $query->fetch(PDO::FETCH_ASSOC)){ 
-                                ?>
-                <option value="<?php echo ''.$row1["danhmucchinh"]?>">
-                    <?php echo ''.$row1["tendanhmuc"]?></option>
-
-                <?php }?>
+                <?php
+                $query = $conn->query("SELECT * FROM `danhmuc`");
+                while ($row1 = $query->fetch(PDO::FETCH_ASSOC)) {
+                ?>
+                    <option value="<?php echo '' . $row1["danhmucchinh"] ?>">
+                        <?php echo '' . $row1["tendanhmuc"] ?></option>
+                <?php } ?>
             </select>
             <input type="search" name="tukhoa" style="max-height:45px" placeholder="Search here.....">
         </form>
