@@ -202,9 +202,6 @@ $users_quyen = $users['phanquyen'];
                     </ul>
                 </div>
             </nav>
-
-
-
             <div id="content" class="flex-grow-1">
                 <div class="header__top bg-white shadow-sm">
                     <div class="container">
@@ -225,9 +222,9 @@ $users_quyen = $users['phanquyen'];
                                             <i style="font-size: 24px;" class="fa fa-user-circle-o"></i>
                                         </button>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#"><?php echo $site_email; ?></a></li>
+                                            <li><a class="dropdown-item" href="#">user@gmail.com</a></li>
                                             <?php if ($users_quyen == 99) { ?>
-                                                <li><a class="dropdown-item" href="<?php echo $site_domain ?>/admin">Trang Quản Trị</a></li>
+                                                <li><a class="dropdown-item" href="<?php echo $site_domain ?>admin/index.php">Trang Quản Trị</a></li>
                                             <?php } ?>
                                             <?php if (isset($_SESSION["user"])) { ?>
                                                 <li><a class="dropdown-item" href="<?php echo $site_domain ?>/logout.php">Đăng xuất</a></li>

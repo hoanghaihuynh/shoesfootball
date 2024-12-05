@@ -58,7 +58,7 @@
                         document.write(new Date().getFullYear());
                         </script>
                         All rights reserved | This template is made with <i class="fa fa-heart-o"
-                            aria-hidden="true"></i> by <a href="#" target="_blank">VanQuang</a>
+                            aria-hidden="true"></i> 
                     </p>
                 </div>
             </div>
