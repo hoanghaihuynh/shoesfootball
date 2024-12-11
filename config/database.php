@@ -3,7 +3,7 @@
 $server_name = "localhost";
 $db_username = "root";
 $db_password = "";
-$db_name = "banquanao";
+$db_name = "shoesfootball";
 $conn = new PDO("mysql:host=$server_name; dbname=$db_name; charset=utf8", $db_username, $db_password);  // kết nối đến database. $conn gọi là đối tượng kết nối.
 
 session_start(); //khởi tạo session

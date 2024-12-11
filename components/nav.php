@@ -15,112 +15,90 @@ $users_quyen = $users['phanquyen'];
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
-        :root {
-            --primary-color: #4e54c8;
-            --secondary-color: #8f94fb;
-            --accent-color: #ff6b6b;
-            --background-color: #f8f9fa;
-            --text-color: #333;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
-        }
-
         #sidebar {
-            min-width: 175px;
-            max-width: 175px;
-            min-height: 100vh;
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            min-width: 250px;
+            max-width: 250px;
+            background-color: #343a40;
             color: white;
-            transition: all 0.3s;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: -250px;
+            transition: all 0.3s ease;
+            z-index: 1050;
         }
 
-        #sidebar .nav-link {
-            color: rgba(255, 255, 255, 0.8);
-            transition: all 0.3s;
-        }
-
-        #sidebar .nav-link:hover {
+        #sidebarCloseBtn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
             color: white;
-            background-color: rgba(255, 255, 255, 0.1);
+            font-size: 24px;
+            cursor: pointer;
+            z-index: inherit;
         }
 
         #sidebar.active {
-            margin-left: -250px;
+            left: 0;
         }
 
-        .card {
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s;
+        #sidebar ul {
+            padding-left: 0;
+            list-style: none;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .btn-toggle {
-            background-color: var(--accent-color);
+        #sidebar ul li a {
             color: white;
+            padding: 15px;
+            display: block;
+            text-decoration: none;
         }
 
-        .btn-toggle:hover {
-            background-color: #ff8585;
+        #sidebar ul li a:hover {
+            background-color: #495057;
         }
 
-        .table {
-            background-color: white;
-            border-radius: 15px;
-            overflow: hidden;
+        /* Top Bar */
+        .topbar {
+            z-index: 1040;
         }
 
-        .progress {
-            height: 8px;
+        /* Hides hamburger and sidebar on large screens */
+        @media (min-width: 769px) {
+            #sidebar {
+                display: none;
+                /* Hide sidebar on screens larger than 768px */
+            }
+
+            #sidebarToggle {
+                display: none;
+                /* Hide hamburger button on screens larger than 768px */
+            }
         }
 
+        /* Shows hamburger button and sidebar on small screens */
         @media (max-width: 768px) {
             #sidebar {
-                margin-left: -250px;
+                position: absolute;
+                left: -250px;
             }
 
             #sidebar.active {
-                margin-left: 0;
+                left: 0;
+            }
+
+            #sidebarToggle {
+                display: block;
+                /* Show hamburger button on screens smaller than 768px */
             }
         }
 
-        /* Con trỏ dạng pointer khi hover */
-        .custom-hover {
-            cursor: pointer;
-            /* Thay đổi con trỏ chuột */
-            transition: background-color 0.3s ease, opacity 0.3s ease;
-            /* Hiệu ứng mượt */
-        }
-
-        /* Hiệu ứng mờ dần nền khi hover */
-        .custom-hover:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            /* Nền mờ đi */
-            opacity: 0.8;
-            /* Độ trong suốt */
-        }
-
-        /* Đặt dropdown của "Cửa hàng" đứng trên các phần tử khác */
-        #sidebar .dropdown-menu {
-            z-index: 1050;
-            /* Đặt z-index cao để đảm bảo luôn trên các phần tử khác */
-            position: relative;
-            /* Đảm bảo vị trí menu không bị ảnh hưởng bởi phần tử cha */
-        }
-
-        /* Đảm bảo toàn bộ sidebar không ảnh hưởng tới các phần tử con */
-        #sidebar {
-            position: relative;
-            z-index: 1;
+        /* Optional: Add padding to the body when sidebar is active */
+        body.sidebar-active {
+            padding-left: 250px;
+            /* Push content when sidebar is shown */
         }
     </style>
 </head>
@@ -131,176 +109,199 @@ $users_quyen = $users['phanquyen'];
         <div class="loader"></div>
     </div>
 
-    <!-- Offcanvas Menu Begin -->
-    <div class="offcanvas-menu-overlay"></div>
-    <div class="offcanvas-menu-wrapper">
-        <div class="offcanvas__option">
-            <div class="offcanvas__links"><?php
-                                            if (!isset($_SESSION["user"])) {
-                                            ?>
-                    <a href="#">Đăng nhập</a><?php } ?>
-                <a href="#">FAQs</a> <?php if ($users_quyen == 99) { ?><a href="<?php echo $site_domain ?>/admin">Trang
-                        Quản
-                        Trị</a>
-                    <?php } ?><?php if (isset($_SESSION["user"])) {
-                                ?>
-                    <a href="<?php echo $site_domain ?>/logout.php">Đăng xuất</a><?php } ?>
-            </div>
-
-        </div>
-
-        <div id="mobile-menu-wrap"></div>
-        <div class="offcanvas__text">
-            <p><?php echo $site_email ?></p>
-        </div>
-    </div>
-    <!-- Offcanvas Menu End -->
-
-    <!-- Header Section Begin -->
     <header class="header">
+        <!-- Top Bar -->
+        <div class="topbar bg-dark text-white py-2">
+            <div class="container">
+                <div class="row justify-content-between align-items-center">
+                    <!-- Hamburger Button -->
+                    <div class="col-auto">
+                        <button class="btn btn-dark" id="sidebarToggle">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
+
+                    <!-- Centered Text -->
+                    <div class="col-auto text-center">
+                        <span>SHOESFOOTBALL | Since 2024</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Sidebar -->
-        <div class="d-flex">
-            <nav id="sidebar" class="position-fixed vh-100 bg-dark text-white">
-                <div class="position-sticky pt-3">
-                    <div class="px-2 py-4">
-                        <h3 class="text-white fs-5">SHOOSE STORE</h3>
-                    </div>
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="./home.php">
-                                <i class="fas fa-home me-2"></i>Trang Chủ
-                            </a>
-                        </li>
-                        <!-- Dropdown for Cửa hàng -->
-                        <li class="nav-item dropend position-relative">
-                            <a
-                                class="nav-link dropdown-toggle"
-                                href="#"
-                                id="shopDropdown"
-                                role="button"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                <i class="fas fa-store me-2"></i>Cửa hàng
-                            </a>
-                            <ul class="dropdown-menu bg-dark text-white border-0 position-absolute" aria-labelledby="shopDropdown">
-                                <li>
-                                    <a class="dropdown-item custom-hover text-white" href="./home.php?filter=best-sellers">Bán chạy nhất</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item custom-hover text-white" href="./home.php?filter=new-products">Sản phẩm mới</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item custom-hover text-white" href="./home.php?filter=discounts">Giảm giá sốc</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./donhang.php">
-                                <i class="fas fa-box me-2"></i>Đơn hàng
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-            <div id="content" class="flex-grow-1">
-                <div class="header__top bg-white shadow-sm">
-                    <div class="container">
-                        <div class="row align-items-center">
-                            <div class="col-lg-6 col-md-7">
-                                <div class="header__top__left d-flex align-items-center text-dark">
-                                    <button type="button" id="sidebarCollapse" class="btn btn-danger btn-sm me-2">
-                                        <i class="fas fa-bars"></i>
-                                    </button>
-                                    <!-- <p class="mb-0 text-dark"><?php echo $site_email ?></p> -->
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-5 text-end">
-                                <div class="header__top__right">
+        <div id="sidebar">
+    <button id="sidebarCloseBtn">
+        <i class="fas fa-times"></i>
+    </button>
+    <div class="position-sticky pt-3">
+        <div class="px-2 py-4">
+            <h3 class="text-white fs-5">SHOES STORE</h3>
+        </div>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link active" href="./home.php">
+                    <i class="fas fa-home me-2"></i>Trang Chủ
+                </a>
+            </li>
+            <li class="nav-item dropend position-relative">
+                <a class="nav-link dropdown-toggle" href="#" id="shopDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-store me-2"></i>Cửa hàng
+                </a>
+                <ul class="dropdown-menu bg-dark text-white border-0 position-absolute" aria-labelledby="shopDropdown">
+                    <li><a class="dropdown-item custom-hover text-white" href="./home.php?filter=best-sellers">Bán chạy nhất</a></li>
+                    <li><a class="dropdown-item custom-hover text-white" href="./home.php?filter=new-products">Sản phẩm mới</a></li>
+                    <li><a class="dropdown-item custom-hover text-white" href="./home.php?filter=discounts">Giảm giá sốc</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./donhang.php">
+                    <i class="fas fa-box me-2"></i>Đơn hàng
+                </a>
+            </li>
+            <!-- Thêm item tìm kiếm vào sidebar -->
+            <li class="nav-item">
+                <a class="nav-link" href="./search.php">
+                    <i class="fas fa-search me-2"></i>Tìm kiếm
+                </a>
+            </li>
+            <!-- Thêm item giỏ hàng vào sidebar -->
+            <li class="nav-item">
+                <a class="nav-link" href="./shopping-cart.php?magiamgia=">
+                    <i class="fas fa-shopping-cart me-2"></i>Giỏ hàng
+                    <span class="badge bg-danger" id="cartQty">
+                        <?php
+                            // Đếm số lượng sản phẩm trong giỏ hàng
+                            $email = $_SESSION["user"];
+                            $qty = 0;
+                            $query = $conn->query("SELECT * FROM `cart` WHERE `email` = '$email'");
+                            while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+                                $qty += 1;
+                            }
+                            echo $qty;
+                        ?>
+                    </span>
+                </a>
+            </li>
+            <!-- Thêm item đăng xuất vào sidebar -->
+            <li class="nav-item">
+                <a class="nav-link" href="<?php echo $site_domain ?>/logout.php">
+                    <i class="fas fa-sign-out-alt me-2"></i>Đăng xuất
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
 
-                                    <div class="dropdown">
-                                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <i style="font-size: 24px;" class="fa fa-user-circle-o"></i>
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">user@gmail.com</a></li>
-                                            <?php if ($users_quyen == 99) { ?>
-                                                <li><a class="dropdown-item" href="<?php echo $site_domain ?>admin/index.php">Trang Quản Trị</a></li>
-                                            <?php } ?>
-                                            <?php if (isset($_SESSION["user"])) { ?>
-                                                <li><a class="dropdown-item" href="<?php echo $site_domain ?>/logout.php">Đăng xuất</a></li>
-                                            <?php } ?>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
+        <div id="content" class="flex-grow-1">
+            <div class="header__top bg-white shadow-sm">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-3">
-
-                        </div>
+                    <div class="row align-items-center">
+                        <!-- header__top__left (Chuyển từ middle) -->
                         <div class="col-lg-6 col-md-6">
-                            <nav class="header__menu mobile-menu">
-                                <ul>
-                                    <!-- <li class="active"><a href="./index.php"><i class="fas fa-home me-2"></i>Trang chủ</a></li> -->
-                                    <!-- <li><a href="./shop.php?danhmuc=">Cửa hàng</a></li> -->
-                                    <!-- <li><a href="./donhang.php">Đơn hàng đã mua</a></li> -->
+                            <nav class="header__top__left">
+                                <ul class="list-inline m-0 p-0">
+                                    <li class="list-inline-item">
+                                        <a href="./home.php" class="text-dark text-decoration-none">Trang chủ</a>
+                                    </li>
+                                    <li class="list-inline-item dropdown">
+                                        <a href="#" class="text-dark text-decoration-none dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Cửa hàng
+                                        </a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <li><a class="dropdown-item" href="./home.php?filter=best-sellers">Bán chạy nhất</a></li>
+                                            <li><a class="dropdown-item" href="./home.php?filter=new-products">Sản phẩm mới</a></li>
+                                            <li><a class="dropdown-item" href="./home.php?filter=discounts">Giảm giá sốc</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="./donhang.php" class="text-dark text-decoration-none">Đơn hàng</a>
+                                    </li>
                                 </ul>
                             </nav>
                         </div>
-                        <div class="col-lg-3 col-md-3">
-                            <div class="header__nav__option">
-                                <a href="#" class="search-switch"><img src="img/icon/search.png" alt=""></a>
-                                <a href="<?php echo $site_domain ?>/shopping-cart.php?magiamgia="><img src="img/icon/cart.png"
-                                        alt="">
-                                    <span><?php
-                                            $qty = 0;
-                                            $query = $conn->query("SELECT * FROM `cart` WHERE `email` = '$email'");
-                                            while ($row1 = $query->fetch(PDO::FETCH_ASSOC)) {
-                                                //lấ ds sản phẩm có trong giỏ hàng của user
-                                                $qty += 1;
 
-                                            ?>
-                                        <?php }
-                                            echo $qty; ?>
-                                    </span></a>
-                                <div class="price"><?php $qty = 0;
-                                                    $query = $conn->query("SELECT * FROM `cart` WHERE `email` = '$email'");
-                                                    while ($row1 = $query->fetch(PDO::FETCH_ASSOC)) {
-                                                        $qty += $row1['tongtien'];
-                                                    ?> <?php }
-                                                    echo number_format($qty); ?> VNĐ</div>
+                        <!-- header__top__right -->
+                        <div class="col-lg-6 col-md-6 text-end">
+                            <div class="header__top__right">
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i style="font-size: 24px;" class="fa fa-user-circle-o"></i>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">user@gmail.com</a></li>
+                                        <?php if ($users_quyen == 99) { ?>
+                                            <li><a class="dropdown-item" href="<?php echo $site_domain ?>admin/index.php">Trang Quản Trị</a></li>
+                                        <?php } ?>
+                                        <?php if (isset($_SESSION["user"])) { ?>
+                                            <li><a class="dropdown-item" href="<?php echo $site_domain ?>/logout.php">Đăng xuất</a></li>
+                                        <?php } ?>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="canvas__open"><i class="fa fa-bars"></i></div>
                 </div>
             </div>
-            <!-- Header top-->
 
+
+
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3">
+
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <nav class="header__menu mobile-menu">
+                            <ul>
+                                <!-- <li class="active"><a href="./index.php"><i class="fas fa-home me-2"></i>Trang chủ</a></li> -->
+                                <!-- <li><a href="./shop.php?danhmuc=">Cửa hàng</a></li> -->
+                                <!-- <li><a href="./donhang.php">Đơn hàng đã mua</a></li> -->
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="col-lg-3 col-md-3">
+                        <div class="header__nav__option">
+                            <a href="#" class="search-switch"><img src="img/icon/search.png" alt=""></a>
+                            <a href="<?php echo $site_domain ?>/shopping-cart.php?magiamgia="><img src="img/icon/cart.png"
+                                    alt="">
+                                <span><?php
+                                        $qty = 0;
+                                        $query = $conn->query("SELECT * FROM `cart` WHERE `email` = '$email'");
+                                        while ($row1 = $query->fetch(PDO::FETCH_ASSOC)) {
+                                            //lấ ds sản phẩm có trong giỏ hàng của user
+                                            $qty += 1;
+
+                                        ?>
+                                    <?php }
+                                        echo $qty; ?>
+                                </span></a>
+                            <div class="price"><?php $qty = 0;
+                                                $query = $conn->query("SELECT * FROM `cart` WHERE `email` = '$email'");
+                                                while ($row1 = $query->fetch(PDO::FETCH_ASSOC)) {
+                                                    $qty += $row1['tongtien'];
+                                                ?> <?php }
+                                                echo number_format($qty); ?> VNĐ</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var sidebar = document.getElementById('sidebar');
-            var sidebarCollapse = document.getElementById('sidebarCollapse');
+        // Toggle Sidebar when hamburger button is clicked
+        document.getElementById('sidebarToggle').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.toggle('active');
+        });
 
-            sidebarCollapse.addEventListener('click', function() {
-                sidebar.classList.toggle('active');
-            });
-
-            // Initialize tooltips
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-            var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl)
-            });
+        document.getElementById('sidebarCloseBtn').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.remove('active');
+            document.body.classList.remove('sidebar-active'); // Remove padding from content when sidebar is closed
         });
     </script>
 </body>

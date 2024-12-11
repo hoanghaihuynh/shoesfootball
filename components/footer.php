@@ -8,9 +8,9 @@ require_once('./config/database.php');
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="footer__about">
                     <div class="footer__logo">
-                        <a href="#">SHOPQUANAO</a>
+                        <a href="#">SHOESFOOTBALL</a>
                     </div>
-                    <p><?php echo $site_about ?></p>
+                    <p><?php echo $site_about?></p>
                     <a href="#"><img src="img/payment.png" alt=""></a>
                 </div>
             </div>

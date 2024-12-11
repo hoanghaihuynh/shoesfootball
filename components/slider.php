@@ -3,12 +3,19 @@ require_once('./config/database.php');
 ?>
 
 <style>
+    @media screen and (max-width: 768px) {
+        .slider-container {
+            margin-top: 10px;
+        }
+    }
+
     .slider-container {
         /* max-width: 1200px; */
         /* Điều chỉnh chiều rộng tối đa */
-        margin: 0 auto;
+        margin: 10px auto;
         /* Căn giữa carousel */
-        position: relative; /* Cần thiết để z-index hoạt động */
+        position: relative;
+        /* Cần thiết để z-index hoạt động */
         z-index: 0;
     }
 
@@ -18,8 +25,10 @@ require_once('./config/database.php');
         object-fit: cover;
         /* Giữ hình ảnh phù hợp mà không bị méo */
     }
+
     h2 {
-        margin-top: 40px;margin-bottom: 40px;
+        margin-top: 40px;
+        margin-bottom: 40px;
     }
 </style>
 
