@@ -47,6 +47,7 @@ $users_quyen = $users['phanquyen'];
         #sidebar ul {
             padding-left: 0;
             list-style: none;
+
         }
 
         #sidebar ul li a {
@@ -81,7 +82,7 @@ $users_quyen = $users['phanquyen'];
         /* Shows hamburger button and sidebar on small screens */
         @media (max-width: 768px) {
             #sidebar {
-                position: absolute;
+                position: fixed;
                 left: -250px;
             }
 
@@ -131,67 +132,67 @@ $users_quyen = $users['phanquyen'];
 
         <!-- Sidebar -->
         <div id="sidebar">
-    <button id="sidebarCloseBtn">
-        <i class="fas fa-times"></i>
-    </button>
-    <div class="position-sticky pt-3">
-        <div class="px-2 py-4">
-            <h3 class="text-white fs-5">SHOES STORE</h3>
-        </div>
-        <ul class="nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link active" href="./home.php">
-                    <i class="fas fa-home me-2"></i>Trang Chủ
-                </a>
-            </li>
-            <li class="nav-item dropend position-relative">
-                <a class="nav-link dropdown-toggle" href="#" id="shopDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fas fa-store me-2"></i>Cửa hàng
-                </a>
-                <ul class="dropdown-menu bg-dark text-white border-0 position-absolute" aria-labelledby="shopDropdown">
-                    <li><a class="dropdown-item custom-hover text-white" href="./home.php?filter=best-sellers">Bán chạy nhất</a></li>
-                    <li><a class="dropdown-item custom-hover text-white" href="./home.php?filter=new-products">Sản phẩm mới</a></li>
-                    <li><a class="dropdown-item custom-hover text-white" href="./home.php?filter=discounts">Giảm giá sốc</a></li>
+            <button id="sidebarCloseBtn">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="position-sticky pt-3">
+                <div class="px-2 py-4">
+                    <h3 class="text-white fs-5">SHOES STORE</h3>
+                </div>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="./home.php">
+                            <i class="fas fa-home me-2"></i>Trang Chủ
+                        </a>
+                    </li>
+                    <li class="nav-item dropend position-relative">
+                        <a class="nav-link dropdown-toggle" href="#" id="shopDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-store me-2"></i>Cửa hàng
+                        </a>
+                        <ul class="dropdown-menu bg-dark text-white border-0 position-absolute" aria-labelledby="shopDropdown">
+                            <li><a class="dropdown-item custom-hover text-white" href="./home.php?filter=best-sellers">Bán chạy nhất</a></li>
+                            <li><a class="dropdown-item custom-hover text-white" href="./home.php?filter=new-products">Sản phẩm mới</a></li>
+                            <li><a class="dropdown-item custom-hover text-white" href="./home.php?filter=discounts">Giảm giá sốc</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./donhang.php">
+                            <i class="fas fa-box me-2"></i>Đơn hàng
+                        </a>
+                    </li>
+                    <!-- Thêm item tìm kiếm vào sidebar -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="./search.php">
+                            <i class="fas fa-search me-2"></i>Tìm kiếm
+                        </a>
+                    </li>
+                    <!-- Thêm item giỏ hàng vào sidebar -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="./shopping-cart.php?magiamgia=">
+                            <i class="fas fa-shopping-cart me-2"></i>Giỏ hàng
+                            <span class="badge bg-danger" id="cartQty">
+                                <?php
+                                // Đếm số lượng sản phẩm trong giỏ hàng
+                                $email = $_SESSION["user"];
+                                $qty = 0;
+                                $query = $conn->query("SELECT * FROM `cart` WHERE `email` = '$email'");
+                                while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+                                    $qty += 1;
+                                }
+                                echo $qty;
+                                ?>
+                            </span>
+                        </a>
+                    </li>
+                    <!-- Thêm item đăng xuất vào sidebar -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo $site_domain ?>/logout.php">
+                            <i class="fas fa-sign-out-alt me-2"></i>Đăng xuất
+                        </a>
+                    </li>
                 </ul>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="./donhang.php">
-                    <i class="fas fa-box me-2"></i>Đơn hàng
-                </a>
-            </li>
-            <!-- Thêm item tìm kiếm vào sidebar -->
-            <li class="nav-item">
-                <a class="nav-link" href="./search.php">
-                    <i class="fas fa-search me-2"></i>Tìm kiếm
-                </a>
-            </li>
-            <!-- Thêm item giỏ hàng vào sidebar -->
-            <li class="nav-item">
-                <a class="nav-link" href="./shopping-cart.php?magiamgia=">
-                    <i class="fas fa-shopping-cart me-2"></i>Giỏ hàng
-                    <span class="badge bg-danger" id="cartQty">
-                        <?php
-                            // Đếm số lượng sản phẩm trong giỏ hàng
-                            $email = $_SESSION["user"];
-                            $qty = 0;
-                            $query = $conn->query("SELECT * FROM `cart` WHERE `email` = '$email'");
-                            while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
-                                $qty += 1;
-                            }
-                            echo $qty;
-                        ?>
-                    </span>
-                </a>
-            </li>
-            <!-- Thêm item đăng xuất vào sidebar -->
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo $site_domain ?>/logout.php">
-                    <i class="fas fa-sign-out-alt me-2"></i>Đăng xuất
-                </a>
-            </li>
-        </ul>
-    </div>
-</div>
+            </div>
+        </div>
 
         <div id="content" class="flex-grow-1">
             <div class="header__top bg-white shadow-sm">
