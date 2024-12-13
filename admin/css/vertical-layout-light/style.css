@@ -23087,6 +23087,7 @@ body.avgrund-active {
 }
 
 .main-panel {
+  
   transition: width 0.25s ease, margin 0.25s ease;
   width: calc(100% - 255px);
   min-height: calc(100vh - 64px);
@@ -23094,6 +23095,7 @@ body.avgrund-active {
   display: flex;
   -webkit-flex-direction: column;
   flex-direction: column;
+  
 }
 
 @media (max-width: 991px) {
