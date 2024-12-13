@@ -71,6 +71,13 @@
                             <p>Ghi chú đặt hàng</p>
                             <input type="text" placeholder="Ghi chú đặt hàng" name="note" required>
                         </div>
+                        <div class="checkout__input">
+                            <p>Phương thức thanh toán<span>*</span></p>
+                            <select name="payment_method" required>
+                                <option value="cod">Thanh toán khi nhận hàng (COD)</option>
+                                <option value="paypal">Thanh toán trực tuyến (PayPal)</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="checkout__order">
