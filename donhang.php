@@ -91,7 +91,148 @@ $email = $_SESSION["user"];
                                                             <td class="sorting_1">
                                                                 <?php echo '' . $qty ?>
                                                             </td>
-                                                            <td>
+                                                            <td><div class="main-panel" style="padding-left:50px;padding-top:20px;padding-right:50px">
+    <div class="box">
+        <div class="box-header with-border">
+            <div class="left">
+                <h3 class="box-title">Đăng sản phẩm</h3>
+            </div>
+        </div><!-- /.box-header -->
+
+        <form class="box-body" method="POST" enctype="multipart/form-data">
+            <!-- include message block -->
+
+            <!--print error messages-->
+
+            <!--print custom error message-->
+
+            <!--print custom success message-->
+
+            <div class="form-group">
+                <label class="control-label">Tên sản phẩm</label>
+                <input type="text" id="title" class="form-control" name="title" placeholder="Tiêu đề" value="" required="" fdprocessedid="i9pziq" onkeyup="ChangeToSlug();">
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Slug <small>(Nếu bạn để trống, nó sẽ được tạo tự động.)</small>
+                </label>
+                <input type="text" class="form-control" name="slug" placeholder="Slug" value="" id="slug" required="" fdprocessedid="oboy0m">
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Tóm lược &amp; Sự miêu tả (Thẻ meta)</label>
+                <textarea name="summary" id="summary" placeholder="Tóm lược &amp; Sự miêu tả (Thẻ meta)" style="width:70%;height:200px;">
+            </textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Từ khóa (Thẻ meta)</label>
+                <input type="text" class="form-control" name="keywords" placeholder="Từ khóa (Thẻ meta)" value="" required="" fdprocessedid="c7g48i">
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Số tiền gốc</label>
+                <input type="text" class="form-control" name="sotiengoc" placeholder="Số tiền gốc" value="" fdprocessedid="c7g48i">
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Số tiền (Giảm giá)</label>
+                <input type="text" class="form-control" name="sotiengiamgia" placeholder="Số tiền (Giảm giá)" required="" value="" fdprocessedid="c7g48i">
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Chi tiết sản phẩm</label>
+                <textarea name="chitiet" id="chitiet" placeholder="Chi tiết cửa hàng" style="width:70%;height:200px;"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Sale</label>
+                <input type="text" class="form-control" name="sale" placeholder="Sale (New)" value="" fdprocessedid="c7g48i">
+            </div>
+
+            <!-- <div class="form-group">
+                <label class="control-label">Số lượng hiện có</label>
+                <input type="text" class="form-control" name="slhienco" placeholder="Số lượng hiện có" value="" required
+                    fdprocessedid="c7g48i">
+            </div> -->
+
+
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-4 col-xs-12">
+                        <label>Ghim Lên Đầu</label>
+                    </div>
+                    <div class="col-md-2 col-sm-4 col-xs-12 col-option">
+                        <div class="iradio_square-purple checked"><input type="radio" id="rb_visibility_1" name="visibility" value="1" class="square-purple" checked=""><ins class="iCheck-helper"></ins></div>
+                        <label for="rb_visibility_1" class="cursor-pointer">Ghim lên</label>
+                    </div>
+                    <div class="col-md-2 col-sm-4 col-xs-12 col-option">
+                        <div class="iradio_square-purple" style="position: relative;"><input type="radio" id="rb_visibility_1" name="visibility" value="0" class="square-purple"><ins class="iCheck-helper"></ins></div>
+                        <label for="rb_visibility_2" class="cursor-pointer">Không Ghim</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group m-0">
+                <label class="control-label">Danh mục Chính</label>
+                <select id="subcategories" name="subcategory_id" class="form-control" fdprocessedid="b8z8t2">
+                                        <option value="">NIKE</option>
+                                        <option value="">WIKA</option>
+                                        <option value="">MIZUNO</option>
+                                        <option value="">KAMITO</option>
+                                        <option value="">PUMA</option>
+                                    </select>
+            </div>
+            <br>
+
+            <div class="form-group row-optional-url">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <label class="control-label">URL tùy chọn</label>
+                        <input type="text" class="form-control" name="url" id="url" placeholder="URL tùy chọn" value="" fdprocessedid="ppkiu">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group" style="width:400px">
+                <label class="form-label" for="customFile">Ảnh Sản Phẩm</label>
+                <input type="hidden" name="size" value="100000000">
+                <input type="file" class="form-control" name="image" id="image" value="" required="">
+            </div>
+
+    </form></div>
+    <div class="col-sm-12">
+        <div class="box">
+            <div class="box-header with-border">
+                <div class="left">
+                    <h3 class="box-title">Công khai</h3>
+                </div>
+            </div><!-- /.box-header -->
+
+            <div class="box-body">
+
+                <div class="form-group">
+                    <div class="row">
+
+                        <div class="col-md-5 col-sm-12 col-xs-12 text-right">
+                            <div class="icheckbox_square-purple" style="position: relative;"><input type="checkbox" name="scheduled_post" value="1" id="cb_scheduled" class="square-purple" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" name="submit" value="1" class="btn btn-primary pull-right" onclick="allow_submit_form = true;" fdprocessedid="bxji3">Đăng Sản Phẩm</button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+
+
+</div>
                                                                 <?php echo '' . $row1["madonhang"] ?>
                                                             </td>
                                                             <td><b>
