@@ -139,7 +139,9 @@ $disableBuyButton = false; // Mặc định là false, tức là nút mua hàng 
                     </ul>
                     <!-- Kiểm tra nút mua hàng có bị khóa không -->
                     <?php if (!$disableBuyButton) { ?>
+                        <!-- <a href="checkout.php?magiamgia=<?php echo $magiamgia ?>" class="primary-btn">Mua hàng</a> -->
                         <a href="checkout.php?magiamgia=<?php echo $magiamgia ?>" class="primary-btn">Mua hàng</a>
+
                     <?php } else { ?>
                         <p style="color: red;">Không thể mua hàng với số lượng sản phẩm trên 99</p>
                     <?php } ?>
