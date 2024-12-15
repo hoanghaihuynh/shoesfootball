@@ -84,51 +84,47 @@
                             <h4 class="order__title">Đơn hàng của bạn</h4>
                             <div class="checkout__order__products">Sản phẩm <span>Tổng</span></div>
                             <ul class="checkout__total__products">
-                                <?php 
-						        $qty= 0;
-                                $query = $conn->query("SELECT * FROM `cart` WHERE `email` = '$email'");
-                                while($row1 = $query->fetch(PDO::FETCH_ASSOC)){
-                                    //lấ ds sản phẩm có trong giỏ hàng của user
-                                    $qty += 1;
-                                ?>
-                                <li> <?php echo ''.$row1["name"]?>
-                                    <span style="color:red"><?php echo ''.$row1["soluong"]?> x
-                                        <?php echo ''.number_format($row1["price"])?></span>
-                                </li>
-                                <?php }if($qty==0){?>
-                                <td class="image" data-title="STT">
+    <?php 
+    $qty = 0; // Biến để đếm số lượng sản phẩm
+    $total = 0; // Biến để tính tổng tiền của giỏ hàng
+    $query = $conn->query("SELECT * FROM `cart` WHERE `email` = '$email'");
+    while ($row1 = $query->fetch(PDO::FETCH_ASSOC)) {
+        $qty += $row1["soluong"]; // Cộng số lượng sản phẩm
+        $total += $row1["price"] * $row1["soluong"]; // Tính tổng tiền của sản phẩm (giá * số lượng)
+    ?>
+        <li> 
+            <?php echo $row1["name"]; ?>
+            <span style="color:red">
+                <?php echo $row1["soluong"] . " x " . number_format($row1["price"]); ?>
+            </span>
+        </li>
+    <?php } 
+    if ($qty == 0) { ?>
+        <td class="image" data-title="STT">
+            <p>Không có sản phẩm nào trong giỏ hàng</p>
+        </td>
+    <?php } ?>
+</ul>
 
-                                    <p>Không có sản phẩm nào trong giỏ hàng</p>
-                                </td>
-                                <?php }?>
-                            </ul>
-                            <ul class="checkout__total__all">
-                                <!-- <li>Giảm Giá<span><?php $qty= 0;
-                               // $query = $conn->query("SELECT * FROM `magiamgia` WHERE `magiam` = '$magiamgia' AND `soluong` > 0");
-                                //while($row1 = $query->fetch(PDO::FETCH_ASSOC)){ 
-                                  //  $qty = $row1['sotien'];
-                                //}
-                                //echo number_format($qty);
-                                ?> VNĐ</span></li> -->
-                                <li class="last">Tổng <span>
-                                        <?php $qty= 0;
-                                $query = $conn->query("SELECT * FROM `cart` WHERE `email` = '$email'");
-                                while($row1 = $query->fetch(PDO::FETCH_ASSOC)){ 
-                                    $qty += $row1['tongtien'];
-                                }
-                                $tiengiam= 0;
-                                $query = $conn->query("SELECT * FROM `magiamgia` WHERE `magiam` = '$magiamgia' AND `soluong` > 0");
-                                while($row1 = $query->fetch(PDO::FETCH_ASSOC)){ 
-                                    $tiengiam = $row1['sotien'];
-                                }
-                                //tinhs tong so tien khi apply ma giam gia
-                                if($qty-$tiengiam>=0){
-                                    echo number_format($qty-$tiengiam);
-                                }else{
-                                    echo '0';
-                                }
-                                ?> VNĐ</span></li>
-                            </ul>
+<ul class="checkout__total__all">
+    <li class="last">Tổng <span>
+        <?php 
+        // Tiền giảm giá (nếu có)
+        $tiengiam = 0;
+        $query = $conn->query("SELECT * FROM `magiamgia` WHERE `magiam` = '$magiamgia' AND `soluong` > 0");
+        while ($row1 = $query->fetch(PDO::FETCH_ASSOC)) { 
+            $tiengiam = $row1['sotien']; // Lấy giá trị giảm giá
+        }
+
+        // Tính tổng tiền khi áp dụng mã giảm giá
+        if ($total - $tiengiam >= 0) {
+            echo number_format($total - $tiengiam); // Hiển thị tổng tiền sau khi giảm giá
+        } else {
+            echo '0'; // Nếu tổng tiền < giá trị giảm giá, hiển thị 0
+        }
+        ?> VNĐ</span></li>
+</ul>
+
 
                             <button type="submit" name="addOrder" class="site-btn">Đặt ngay</button>
                         </div>
