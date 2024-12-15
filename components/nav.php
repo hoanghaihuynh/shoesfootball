@@ -265,25 +265,41 @@ $users_quyen = $users['phanquyen'];
                     <div class="col-lg-3 col-md-3">
                         <div class="header__nav__option">
                             <a href="#" class="search-switch"><img src="img/icon/search.png" alt=""></a>
-                            <a href="<?php echo $site_domain ?>/shopping-cart.php?magiamgia="><img src="img/icon/cart.png"
-                                    alt="">
-                                <span><?php
-                                        $qty = 0;
+                            <a href="<?php echo $site_domain ?>/shopping-cart.php?magiamgia=">
+                                <img src="img/icon/cart.png" alt="">
+                                <span>
+                                    <?php
+                                        // Lấy email người dùng từ session
+                                        $email = $_SESSION["user"];
+                                        $cartQty = 0;
+                                        
+                                        // Truy vấn giỏ hàng của người dùng
                                         $query = $conn->query("SELECT * FROM `cart` WHERE `email` = '$email'");
-                                        while ($row1 = $query->fetch(PDO::FETCH_ASSOC)) {
-                                            //lấ ds sản phẩm có trong giỏ hàng của user
-                                            $qty += 1;
+                                        
+                                        // Duyệt qua các sản phẩm trong giỏ hàng và tính số lượng sản phẩm
+                                        while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+                                            $cartQty++; // Tăng số lượng sản phẩm trong giỏ hàng
+                                        }
 
-                                        ?>
-                                    <?php }
-                                        echo $qty; ?>
-                                </span></a>
-                            <div class="price"><?php $qty = 0;
-                                                $query = $conn->query("SELECT * FROM `cart` WHERE `email` = '$email'");
-                                                while ($row1 = $query->fetch(PDO::FETCH_ASSOC)) {
-                                                    $qty += $row1['tongtien'];
-                                                ?> <?php }
-                                                echo number_format($qty); ?> VNĐ</div>
+                                        echo $cartQty; // Hiển thị số lượng sản phẩm
+                                    ?>
+                                </span>
+                            </a>
+                            <div class="price">
+                                <?php
+                                    // Khởi tạo biến tính tổng tiền giỏ hàng
+                                    $totalMoney = 0;
+                                    
+                                    // Duyệt qua các sản phẩm trong giỏ hàng để tính tổng tiền
+                                    $query = $conn->query("SELECT * FROM `cart` WHERE `email` = '$email'");
+                                    while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+                                        $totalMoney += $row['price'] * $row['soluong']; // Giá sản phẩm nhân với số lượng
+                                    }
+
+                                    // Định dạng lại số tiền
+                                    echo number_format($totalMoney, 0, ',', '.') . " VNĐ"; // Hiển thị tổng tiền
+                                ?>
+                            </div>
                         </div>
                     </div>
                 </div>
