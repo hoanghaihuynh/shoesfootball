@@ -39,9 +39,6 @@ if (isset($_GET['code'])) {
     echo '<script>alert("Đăng nhập thành công!");window.location = "home.php";</script>';
     // now you can use this profile info to create account in your website and make user logged in.
 }
-// else {
-//     echo "<a href='" . $client->createAuthUrl() . "'>Google Login</a>";
-// }
 ?>
 
 
