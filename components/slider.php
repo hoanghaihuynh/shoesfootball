@@ -43,7 +43,7 @@ require_once('./config/database.php');
                     <img src="../img/slides/pexels-kampus-8941622.jpg" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                    <img src="../img/slides/pexels-kevin-mccartney-254343-774321.jpg" class="d-block w-100" alt="...">
+                    <img src="../img/slides/pexels-rethaferguson-3621104.jpg" class="d-block w-100" alt="...">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">

@@ -160,12 +160,6 @@ $users_quyen = $users['phanquyen'];
                             <i class="fas fa-box me-2"></i>Đơn hàng
                         </a>
                     </li>
-                    <!-- Thêm item tìm kiếm vào sidebar -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="./search.php">
-                            <i class="fas fa-search me-2"></i>Tìm kiếm
-                        </a>
-                    </li>
                     <!-- Thêm item giỏ hàng vào sidebar -->
                     <li class="nav-item">
                         <a class="nav-link" href="./shopping-cart.php?magiamgia=">

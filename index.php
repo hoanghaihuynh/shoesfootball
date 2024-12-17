@@ -1,5 +1,6 @@
 <?php
 require_once('./config/database.php');
+require_once('./xulyGoogle.php');
 
 if (isset($_SESSION["user"])) {
     // Nếu user đã đăng nhập thì chuyển đến home
@@ -125,6 +126,9 @@ if (isset($_SESSION["user"])) {
             font-size: 14px;
             border-radius: 8px;
             cursor: pointer;
+            text-decoration: none;
+            font-weight: 500;
+            color: #000;
             transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
@@ -141,7 +145,7 @@ if (isset($_SESSION["user"])) {
         }
 
         .form-submit-google:active {
-            background-color: #2a65c7;
+            background-color: #fff;
             /* Màu khi nhấn */
             transform: translateY(0);
             /* Trở lại vị trí gốc */
@@ -229,27 +233,15 @@ if (isset($_SESSION["user"])) {
             <div class="divider">
                 or
             </div>
-            <button class="form-submit-google" name="">
+            <a href="<?= $url ?>" class="form-submit-google">
                 <img src="./img/icon/google_icon.webp" alt=""> Đăng nhập bằng Google
-            </button>
+            </a>
+
             <p class="form-toggle" onclick="toggleForm('register')">Chưa có tài khoản? Đăng ký</p>
         </form>
     </div>
 
-    <script>
-        function toggleForm(form) {
-            const registerForm = document.getElementById('form-register');
-            const loginForm = document.getElementById('form-login');
-
-            if (form === 'login') {
-                registerForm.classList.add('hidden');
-                loginForm.classList.remove('hidden');
-            } else {
-                registerForm.classList.remove('hidden');
-                loginForm.classList.add('hidden');
-            }
-        }
-    </script>
+    <script></script>
 </body>
 
 </html>
@@ -288,7 +280,7 @@ if (isset($_POST['login'])) {
         $query->execute([$emailq, $passs]);
         if ($query->rowCount() == 1) {
             $_SESSION["user"] = $emailq;
-            echo '<script>alert("Đăng nhập thành công!");window.location = "home.php";</script>';
+            echo '<script>alert("Đăng nhập thành công!");window.location = "./home.php";</script>';
         } else {
             echo '<script>alert("Sai tài khoản hoặc mật khẩu!");</script>';
         }
@@ -296,4 +288,22 @@ if (isset($_POST['login'])) {
         echo '<script>alert("Không được để trống!");</script>';
     }
 }
+
+// Hàm xử lý chức năng Đăng nhập bằng Google
+// if (isset($_POST['login-google'])) {
+//     // get profile info
+//     $google_oauth = new Google_Service_Oauth2($client);
+//     $google_account_info = $google_oauth->userinfo->get();
+//     $email =  $google_account_info->email;
+//     $name =  $google_account_info->name;
+
+//     // Kiểm tra xem email này tồn tại chưa,nếu có thì đăng nhập thành công
+//     $query = $conn->prepare("SELECT * FROM user WHERE email = ?");
+//     $query->execute([$email]);
+//     if ($query->rowCount() == 1) {
+//         $_SESSION["user"] = $email;
+//         echo '<script>alert("Đăng nhập thành công!");window.location = "./home.php";</script>';
+//     }
+// }
+
 ?>

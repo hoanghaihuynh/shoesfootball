@@ -19,8 +19,8 @@ include_once('./components/nav.php');
         <div class="row special-list">
             <?php
             $danhm = $_GET['tukhoa'];
-            $select = $_GET['subcategory_id'];
-            $query = $conn->query("SELECT * FROM `products` WHERE `nameProduct` LIKE '%$danhm%' AND `danhmuc` LIKE '%$select%'");
+            // $select = $_GET['subcategory_id'];
+            $query = $conn->query("SELECT * FROM `products` WHERE `nameProduct` LIKE '%$danhm%' ");
             while ($row1 = $query->fetch(PDO::FETCH_ASSOC)) {
                 //tìm kiếm sản phẩm có tên có phần giống tên đã nhập
             ?>

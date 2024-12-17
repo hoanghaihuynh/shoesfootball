@@ -10,7 +10,7 @@ require_once('./config/database.php');
                     <div class="footer__logo">
                         <a href="#">SHOESFOOTBALL</a>
                     </div>
-                    <p><?php echo $site_about?></p>
+                    <p><?php echo $site_about ?></p>
                     <a href="#"><img src="img/payment.png" alt=""></a>
                 </div>
             </div>
@@ -72,15 +72,7 @@ require_once('./config/database.php');
     <div class="h-100 d-flex align-items-center justify-content-center">
         <div class="search-close-switch">+</div>
         <form action="search.php" method="GET" class="search-model-form">
-            <select id="subcategories" name="subcategory_id">
-                <?php
-                $query = $conn->query("SELECT * FROM `danhmuc`");
-                while ($row1 = $query->fetch(PDO::FETCH_ASSOC)) {
-                ?>
-                    <option value="<?php echo '' . $row1["danhmucchinh"] ?>">
-                        <?php echo '' . $row1["tendanhmuc"] ?></option>
-                <?php } ?>
-            </select>
+
             <input type="search" name="tukhoa" style="max-height:45px" placeholder="Search here.....">
         </form>
     </div>
