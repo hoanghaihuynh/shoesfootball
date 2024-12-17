@@ -1,9 +1,78 @@
 <?php
 require_once('./config/database.php');
+require_once 'vendor/autoload.php';
+
+// init configuration
+$clientID = '460428538946-l4ohfn4fml72n4v9tmiiq5etpfe6f97m.apps.googleusercontent.com';
+$clientSecret = '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';
+$redirectUri = 'http://localhost:8080/shoesfootball//home.php';
+
+// create Client Request to access Google API
+$client = new Google_Client();
+$client->setHttpClient(new \GuzzleHttp\Client([
+    'verify' => false
+]));
+$client->setClientId($clientID);
+$client->setClientSecret($clientSecret);
+$client->setRedirectUri($redirectUri);
+$client->addScope("email");
+$client->addScope("profile");
+// authenticate code from Google OAuth Flow
+if (isset($_GET['code'])) {
+    // Debug nhận code
+    echo '<script>console.log("Đã nhận code: " + ' . json_encode($_GET['code']) . ');</script>';
+
+    // Bước 2: Gọi API để lấy token với code
+    try {
+        $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
+        echo '<script>console.log("Token nhận được: ", ' . json_encode($token) . ');</script>';
+
+        // Kiểm tra lỗi trong token
+        if (isset($token['error'])) {
+            echo '<script>console.log("Lỗi khi lấy token: " + ' . json_encode($token['error_description']) . ');</script>';
+            die("Error fetching token: " . $token['error_description']);
+        }
+
+        // Đặt Access Token vào client
+        $client->setAccessToken($token['access_token']);
+        echo '<script>console.log("Access token đã được thiết lập");</script>';
+
+        // Bước 4: Lấy thông tin người dùng từ Google
+        $google_oauth = new Google_Service_Oauth2($client);
+        $google_account_info = $google_oauth->userinfo->get();
+        echo '<script>console.log("Thông tin người dùng đã được lấy: ", ' . json_encode($google_account_info) . ');</script>';
+
+        // Lưu thông tin vào session
+        $email = $google_account_info->email;
+        $name = $google_account_info->name;
+        echo '<script>console.log("Email: " + ' . json_encode($email) . ' + " - Name: " + ' . json_encode($name) . ');</script>';
+
+        // Lưu thông tin vào session
+        $_SESSION["user"] = $email;
+
+        // Thông báo đăng nhập thành công
+        echo '<script>console.log("Đăng nhập thành công!");</script>';
+    } catch (Exception $e) {
+        // Nếu có lỗi xảy ra trong quá trình lấy thông tin người dùng
+        echo '<script>console.log("Lỗi: " + ' . json_encode($e->getMessage()) . ');</script>';
+        die("Error: " . $e->getMessage());
+    }
+} else {
+    echo '<script>console.log("Không nhận được code từ Google");</script>';
+}
+
+
+
+
 require_once('./config/variable.php');
+
+
 include_once('./components/header.php');
 include_once('./components/nav.php');
 include_once('./components/slider.php');
+
+
+
 
 ?>
 

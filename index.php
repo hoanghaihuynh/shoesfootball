@@ -7,8 +7,52 @@ if (isset($_SESSION["user"])) {
     exit;
 }
 ?>
+<?php
 
-<!-- Paste dô đây -->
+require_once 'vendor/autoload.php';
+
+// init configuration
+$clientID = '460428538946-l4ohfn4fml72n4v9tmiiq5etpfe6f97m.apps.googleusercontent.com';
+$clientSecret = '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';
+$redirectUri = 'http://localhost:8080/shoesfootball//home.php';
+
+// create Client Request to access Google API
+$client = new Google_Client();
+$client->setClientId($clientID);
+$client->setClientSecret($clientSecret);
+$client->setRedirectUri($redirectUri);
+$client->addScope("email");
+$client->addScope("profile");
+echo '<script>alert("Đăng nhập thành công1!")</script>';
+
+
+
+// authenticate code from Google OAuth Flow
+if (isset($_GET['code'])) {
+    echo '<script>alert("Đăng nhập thành công2!")</script>';
+    // $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
+    $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
+    if (isset($token['error'])) {
+        var_dump($token);
+        die("Error fetching token");
+    }
+    $client->setAccessToken($token['access_token']);
+
+    // get profile info
+    $google_oauth = new Google_Service_Oauth2($client);
+    $google_account_info = $google_oauth->userinfo->get();
+    $email =  $google_account_info->email;
+    $name =  $google_account_info->name;
+    echo '<script>console.log("Email: ' . $email . ', Name: ' . $name . '");</script>';
+    $_SESSION["user"] = $email;
+    echo '<script>alert("Đăng nhập thành công!");window.location = "home.php";</script>';
+    // now you can use this profile info to create account in your website and make user logged in.
+} else {
+    echo "<a href='" . $client->createAuthUrl() . "'>Google Login</a>";
+}
+
+?>
+
 
 <!DOCTYPE html>
 <html lang="vi">
