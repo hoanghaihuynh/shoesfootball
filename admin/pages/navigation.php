@@ -22,8 +22,8 @@
             <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
                 <ul class="navbar-nav mr-lg-2">
                     <li class="nav-item  d-none d-lg-flex">
-                        <a class="nav-link active" href="<?php echo $site_domain ?>/admin/home.php">
-                            Trang Chủ
+                        <a class="nav-link active" href="<?php echo $site_domain ?>/logout.php">
+                            Đăng xuất
                         </a>
                     </li>
                 </ul>
