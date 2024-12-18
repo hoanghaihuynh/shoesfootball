@@ -5,7 +5,7 @@
  
 
 ?>
-<div class="main-panel" style="">
+<div class="main-panel" style="margin: 64px 0 0 256px;">
     <div class="row">
         <div class="col-md-12">
             <div class="card">

@@ -61,19 +61,10 @@ if (isset($_GET['code'])) {
     echo '<script>console.log("Không nhận được code từ Google");</script>';
 }
 
-
-
-
 require_once('./config/variable.php');
-
-
 include_once('./components/header.php');
 include_once('./components/nav.php');
 include_once('./components/slider.php');
-
-
-
-
 ?>
 
 <br>

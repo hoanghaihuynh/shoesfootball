@@ -1,17 +1,17 @@
 <?php
-  require_once('../../../config/database.php');
-  include_once('../header.php');
-  include_once('../navigation.php');
+require_once('../../../config/database.php');
+include_once('../header.php');
+include_once('../navigation.php');
 
 ?>
-<div class="main-panel" style="padding-left:50px;padding-top:20px;padding-right:50px">
+<div class="main-panel" style="margin: 64px 0 0 256px;">
     <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">DANH SÁCH DANH MỤC</h3>
                     <div class="text-right">
-                        <a href="<?php echo $site_domain?>/admin/pages/danhmuc/danhmuc.php">THÊM DANH MỤC</a>
+                        <a href="<?php echo $site_domain ?>/admin/pages/danhmuc/danhmuc.php">THÊM DANH MỤC</a>
                     </div>
                 </div>
                 <!-- /.card-header -->
@@ -29,33 +29,33 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php 
-                            $i = 1;
+                                <?php
+                                $i = 1;
                                 $query = $conn->query("SELECT * FROM `danhmuc`");
-                                while($row1 = $query->fetch(PDO::FETCH_ASSOC)){
+                                while ($row1 = $query->fetch(PDO::FETCH_ASSOC)) {
                                 ?>
-                                <tr>
-                                    <td class="text-center">
-                                        <?= $i++; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo ''.$row1["danhmucchinh"]?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo ''.$row1["tendanhmuc"]?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php echo ''.$row1["lienket"]?>
-                                    </td>
-                                    <td class="text-center">
-                                        <a href='<?php echo $site_domain?>/admin/pages/danhmuc/delete.php?huydeleidt=<?php echo ''.$row1["id"]?>'
-                                            class="btn btn-default">Xoá</a>
-                                    </td>
-                                    <td class="text-center">
-                                        <a href='<?php echo $site_domain?>/admin/pages/danhmuc/editDanhMuc.php?updateid=<?php echo ''.$row1["id"]?>'
-                                            class="btn btn-default">Sửa</a>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td class="text-center">
+                                            <?= $i++; ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <?php echo '' . $row1["danhmucchinh"] ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <?php echo '' . $row1["tendanhmuc"] ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <?php echo '' . $row1["lienket"] ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <a href='<?php echo $site_domain ?>/admin/pages/danhmuc/delete.php?huydeleidt=<?php echo '' . $row1["id"] ?>'
+                                                class="btn btn-default">Xoá</a>
+                                        </td>
+                                        <td class="text-center">
+                                            <a href='<?php echo $site_domain ?>/admin/pages/danhmuc/editDanhMuc.php?updateid=<?php echo '' . $row1["id"] ?>'
+                                                class="btn btn-default">Sửa</a>
+                                        </td>
+                                    </tr>
                                 <?php } ?>
                             </tbody>
                         </table>
