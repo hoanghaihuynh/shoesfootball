@@ -1,1 +1,6 @@
 /vendor/
+
+Google Login Key
+ClientID: 460428538946-l4ohfn4fml72n4v9tmiiq5etpfe6f97m.apps.googleusercontent.com
+Client secret: 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
+Redirect URI: http://localhost:8080/shoesfootball//home.php 

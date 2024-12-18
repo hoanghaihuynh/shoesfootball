@@ -86,13 +86,23 @@ $email = $_SESSION["user"];
                                                     while ($row1 = $query->fetch(PDO::FETCH_ASSOC)) {
                                                         //lấ danh sách đơn hàng đã mua
                                                         $qty += 1;
-                                                        ?>
+                                                    ?>
                                                         <tr class="odd">
                                                             <td class="sorting_1">
                                                                 <?php echo '' . $qty ?>
                                                             </td>
+<<<<<<< HEAD
                                                             <td><div class="main-panel" style="padding-left:50px;padding-top:20px;padding-right:50px">
 </div>
+=======
+                                                            <td>
+                                                                <div class="main-panel" style="padding-left:50px;padding-top:20px;padding-right:50px">
+
+
+
+
+                                                                </div>
+>>>>>>> TestGoogleLogin
                                                                 <?php echo '' . $row1["madonhang"] ?>
                                                             </td>
                                                             <td><b>
