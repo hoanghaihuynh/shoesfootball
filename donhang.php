@@ -4,9 +4,29 @@ include_once('./components/header.php');
 include_once('./components/nav.php');
 
 $email = $_SESSION["user"];
+
+$records_per_page = 10; // Số bản ghi mỗi trang
+$page = isset($_GET['page']) ? intval($_GET['page']) : 1; // Trang hiện tại
+$offset = ($page - 1) * $records_per_page; // Tính toán offset
+
+// Lấy tổng số bản ghi
+$total_records_query = $conn->query("SELECT COUNT(*) as total FROM `donhang` WHERE `email` = '$email'");
+$total_records = $total_records_query->fetch(PDO::FETCH_ASSOC)['total'];
+$total_pages = ceil($total_records / $records_per_page);
+
+// Lấy dữ liệu cho trang hiện tại
+$query = $conn->query("SELECT * FROM `donhang` WHERE `email` = '$email' ORDER BY `id` DESC LIMIT $offset, $records_per_page");
+
+$qty = 0;
 ?>
-
-
+<style>
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
+</style>
 <div style="padding-top:50px" class="container">
     <div class="content-page">
         <div class="container-fluid">
@@ -62,7 +82,7 @@ $email = $_SESSION["user"];
                                                             style="width: 246.781px;">Sản phẩm</th>
                                                         <th class="sorting" tabindex="0"
                                                             aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
-                                                            aria-label="Sản phẩm: activate to sort column ascending"
+                                                            aria-label="Trạng thái: activate to sort column ascending"
                                                             style="width: 246.781px;">Trạng thái</th>
                                                         <th class="sorting" tabindex="0"
                                                             aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
@@ -72,37 +92,21 @@ $email = $_SESSION["user"];
                                                             aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
                                                             aria-label="Thanh toán: activate to sort column ascending"
                                                             style="width: 64.8906px;">Thanh toán</th>
-
-                                                        <!-- <th class="sorting" tabindex="0"
-                                                            aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
-                                                            aria-label="Thao tác: activate to sort column ascending"
-                                                            style="width: 83.4844px;">Thao tác</th> -->
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <?php
-                                                    $qty = 0;
-                                                    $query = $conn->query("SELECT * FROM `donhang` WHERE `email` = '$email' ORDER BY `id` DESC");
                                                     while ($row1 = $query->fetch(PDO::FETCH_ASSOC)) {
-                                                        //lấ danh sách đơn hàng đã mua
                                                         $qty += 1;
                                                     ?>
+                                                        ?>
                                                         <tr class="odd">
                                                             <td class="sorting_1">
                                                                 <?php echo '' . $qty ?>
                                                             </td>
-<<<<<<< HEAD
-                                                            <td><div class="main-panel" style="padding-left:50px;padding-top:20px;padding-right:50px">
-</div>
-=======
                                                             <td>
                                                                 <div class="main-panel" style="padding-left:50px;padding-top:20px;padding-right:50px">
-
-
-
-
                                                                 </div>
->>>>>>> TestGoogleLogin
                                                                 <?php echo '' . $row1["madonhang"] ?>
                                                             </td>
                                                             <td><b>
@@ -133,11 +137,37 @@ $email = $_SESSION["user"];
                                             </table>
                                         </div>
                                     </div>
+                                    <!-- Phân trang -->
                                     <div class="row">
-                                        <div class="col-sm-12 col-md-5"></div>
-                                        <div class="col-sm-12 col-md-7">
-                                            <div class="dataTables_paginate paging_simple_numbers"
-                                                id="DataTables_Table_0_paginate"></div>
+                                        <div class="col-sm-12 ">
+                                            <nav aria-label="Page navigation">
+                                                <ul class="pagination justify-content-center">
+                                                    <!-- Nút Trang Trước -->
+                                                    <?php if ($page > 1): ?>
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="?page=<?= $page - 1 ?>" aria-label="Previous">
+                                                                <span aria-hidden="true">«</span>
+                                                            </a>
+                                                        </li>
+                                                    <?php endif; ?>
+
+                                                    <!-- Các số trang -->
+                                                    <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                                                        <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
+                                                            <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                                                        </li>
+                                                    <?php endfor; ?>
+
+                                                    <!-- Nút Trang Sau -->
+                                                    <?php if ($page < $total_pages): ?>
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="?page=<?= $page + 1 ?>" aria-label="Next">
+                                                                <span aria-hidden="true">»</span>
+                                                            </a>
+                                                        </li>
+                                                    <?php endif; ?>
+                                                </ul>
+                                            </nav>
                                         </div>
                                     </div>
                                 </div>
@@ -148,10 +178,8 @@ $email = $_SESSION["user"];
             </div>
         </div>
     </div>
-
-
-
 </div>
+
 
 
 
