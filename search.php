@@ -39,7 +39,7 @@ include_once('./components/nav.php');
                             <form method="post" action="dao/addCart.php">
                                 <input type="hidden" name="idsp" value="<?php echo '' . $row1["id"] ?>">
                                 <input type="hidden" value="1" name="quanty">
-                                <a><button type="submit" name="addCart" class="add-cart">+ Thêm vào giỏhàng</button></a>
+                                <a><button type="submit" name="addCart" class="add-cart">+ Thêm vào giỏ hàng</button></a>
                             </form>
                             <div class="rating">
                                 <i class="fa fa-star"></i>

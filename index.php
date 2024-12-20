@@ -1,6 +1,6 @@
 <?php
 require_once('./config/database.php');
-require_once('./xulyGoogle.php');
+
 
 if (isset($_SESSION["user"])) {
     // Nếu user đã đăng nhập thì chuyển đến home
@@ -48,7 +48,7 @@ if (isset($_GET['code'])) {
     $_SESSION["user"] = $email;
     echo '<script>alert("Đăng nhập thành công!");window.location = "home.php";</script>';
     // now you can use this profile info to create account in your website and make user logged in.
-} 
+}
 
 ?>
 
@@ -283,15 +283,31 @@ if (isset($_GET['code'])) {
             <div class="divider">
                 or
             </div>
-            <button class="form-submit-google" name="">
+
+
+            <a class="form-submit-google" href="<?= $client->createAuthUrl() ?>">
                 <img src="./img/icon/google_icon.webp" alt="">
-                <a href="<?= $client->createAuthUrl() ?>">Đăng nhập với Google</a>
-            </button>
+                Đăng nhập với Google
+            </a>
+
             <p class="form-toggle" onclick="toggleForm('register')">Chưa có tài khoản? Đăng ký</p>
         </form>
     </div>
 
-    <script></script>
+    <script>
+        function toggleForm(form) {
+            const registerForm = document.getElementById('form-register');
+            const loginForm = document.getElementById('form-login');
+
+            if (form === 'login') {
+                registerForm.classList.add('hidden');
+                loginForm.classList.remove('hidden');
+            } else {
+                registerForm.classList.remove('hidden');
+                loginForm.classList.add('hidden');
+            }
+        }
+    </script>
 </body>
 
 </html>

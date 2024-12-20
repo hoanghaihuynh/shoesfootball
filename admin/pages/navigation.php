@@ -3,7 +3,7 @@
 
 <style>
     .sidebar {
-        position: fixed;
+        position: fixed !important;
     }
 </style>
 

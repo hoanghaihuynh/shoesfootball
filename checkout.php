@@ -1,9 +1,9 @@
 <?php
-  require_once('./config/database.php');
-  include_once('./components/header.php');
-  include_once('./components/nav.php');
-   $email = $_SESSION["user"];
-  $magiamgia = $_GET["magiamgia"];
+require_once('./config/database.php');
+include_once('./components/header.php');
+include_once('./components/nav.php');
+$email = $_SESSION["user"];
+$magiamgia = $_GET["magiamgia"];
 ?>
 <!-- Breadcrumb Section Begin -->
 <section class="breadcrumb-option">
@@ -28,13 +28,13 @@
 <section class="checkout spad">
     <div class="container">
         <div class="checkout__form">
-            <form method="post" action="dao/addOrder.php?magiam=<?php echo $magiamgia?>&magiamgia=<?php $qty= 0;
-                                $query = $conn->query("SELECT * FROM `magiamgia` WHERE `magiam` = '$magiamgia' AND `soluong` > 0");
-                                while($row1 = $query->fetch(PDO::FETCH_ASSOC)){ 
-                                    $qty = $row1['sotien'];
-                                }
-                                echo $qty;
-                                ?>">
+            <form method="post" action="dao/addOrder.php?magiam=<?php echo $magiamgia ?>&magiamgia=<?php $qty = 0;
+                                                                                                    $query = $conn->query("SELECT * FROM `magiamgia` WHERE `magiam` = '$magiamgia' AND `soluong` > 0");
+                                                                                                    while ($row1 = $query->fetch(PDO::FETCH_ASSOC)) {
+                                                                                                        $qty = $row1['sotien'];
+                                                                                                    }
+                                                                                                    echo $qty;
+                                                                                                    ?>">
                 <div class="row">
                     <div class="col-lg-8 col-md-6">
                         <!-- <h6 class="coupon__code"><span class="icon_tag_alt"></span> Have a coupon? <a href="#">Click
@@ -84,46 +84,46 @@
                             <h4 class="order__title">Đơn hàng của bạn</h4>
                             <div class="checkout__order__products">Sản phẩm <span>Tổng</span></div>
                             <ul class="checkout__total__products">
-    <?php 
-    $qty = 0; // Biến để đếm số lượng sản phẩm
-    $total = 0; // Biến để tính tổng tiền của giỏ hàng
-    $query = $conn->query("SELECT * FROM `cart` WHERE `email` = '$email'");
-    while ($row1 = $query->fetch(PDO::FETCH_ASSOC)) {
-        $qty += $row1["soluong"]; // Cộng số lượng sản phẩm
-        $total += $row1["price"] * $row1["soluong"]; // Tính tổng tiền của sản phẩm (giá * số lượng)
-    ?>
-        <li> 
-            <?php echo $row1["name"]; ?>
-            <span style="color:red">
-                <?php echo $row1["soluong"] . " x " . number_format($row1["price"]); ?>
-            </span>
-        </li>
-    <?php } 
-    if ($qty == 0) { ?>
-        <td class="image" data-title="STT">
-            <p>Không có sản phẩm nào trong giỏ hàng</p>
-        </td>
-    <?php } ?>
-</ul>
+                                <?php
+                                $qty = 0; // Biến để đếm số lượng sản phẩm
+                                $total = 0; // Biến để tính tổng tiền của giỏ hàng
+                                $query = $conn->query("SELECT * FROM `cart` WHERE `email` = '$email'");
+                                while ($row1 = $query->fetch(PDO::FETCH_ASSOC)) {
+                                    $qty += $row1["soluong"]; // Cộng số lượng sản phẩm
+                                    $total += $row1["price"] * $row1["soluong"]; // Tính tổng tiền của sản phẩm (giá * số lượng)
+                                ?>
+                                    <li>
+                                        <?php echo $row1["name"]; ?>
+                                        <span style="color:red">
+                                            <?php echo $row1["soluong"] . " x " . number_format($row1["price"]); ?>
+                                        </span>
+                                    </li>
+                                <?php }
+                                if ($qty == 0) { ?>
+                                    <td class="image" data-title="STT">
+                                        <p>Không có sản phẩm nào trong giỏ hàng</p>
+                                    </td>
+                                <?php } ?>
+                            </ul>
 
-<ul class="checkout__total__all">
-    <li class="last">Tổng <span>
-        <?php 
-        // Tiền giảm giá (nếu có)
-        $tiengiam = 0;
-        $query = $conn->query("SELECT * FROM `magiamgia` WHERE `magiam` = '$magiamgia' AND `soluong` > 0");
-        while ($row1 = $query->fetch(PDO::FETCH_ASSOC)) { 
-            $tiengiam = $row1['sotien']; // Lấy giá trị giảm giá
-        }
+                            <ul class="checkout__total__all">
+                                <li class="last">Tổng <span>
+                                        <?php
+                                        // Tiền giảm giá (nếu có)
+                                        $tiengiam = 0;
+                                        $query = $conn->query("SELECT * FROM `magiamgia` WHERE `magiam` = '$magiamgia' AND `soluong` > 0");
+                                        while ($row1 = $query->fetch(PDO::FETCH_ASSOC)) {
+                                            $tiengiam = $row1['sotien']; // Lấy giá trị giảm giá
+                                        }
 
-        // Tính tổng tiền khi áp dụng mã giảm giá
-        if ($total - $tiengiam >= 0) {
-            echo number_format($total - $tiengiam); // Hiển thị tổng tiền sau khi giảm giá
-        } else {
-            echo '0'; // Nếu tổng tiền < giá trị giảm giá, hiển thị 0
-        }
-        ?> VNĐ</span></li>
-</ul>
+                                        // Tính tổng tiền khi áp dụng mã giảm giá
+                                        if ($total - $tiengiam >= 0) {
+                                            echo number_format($total - $tiengiam); // Hiển thị tổng tiền sau khi giảm giá
+                                        } else {
+                                            echo '0'; // Nếu tổng tiền < giá trị giảm giá, hiển thị 0
+                                        }
+                                        ?> VNĐ</span></li>
+                            </ul>
 
 
                             <button type="submit" name="addOrder" class="site-btn">Đặt ngay</button>

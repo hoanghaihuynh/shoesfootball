@@ -114,16 +114,14 @@ include_once('../navigation.php');
                 <div class="form-group" style="width:400px">
                     <label class="form-label" for="customFile">ICON TRANG WEB</label>
                     <input type="hidden" name="size" value="100000000">
-                    <input type="file" class="form-control" name="image" id="image" value="<?php echo '' . $row1["icon"] ?>"
-                        required />
+                    <input type="file" class="form-control" name="image" id="image" value="<?php echo '' . $row1["icon"] ?>" />
                     <img src="<?php echo '' . $row1["icon"] ?>" style="width:100px;height:100px" />
                 </div>
 
                 <div class="form-group" style="width:400px">
                     <label class="form-label" for="customFile">ICON TRANG WEB</label>
                     <input type="hidden" name="size" value="100000000">
-                    <input type="file" class="form-control" name="image3" id="image3" value="<?php echo '' . $row1["logo"] ?>"
-                        required />
+                    <input type="file" class="form-control" name="image3" id="image3" value="<?php echo '' . $row1["logo"] ?>" />
                     <img src="<?php echo '' . $row1["logo"] ?>" style="width:100px;height:100px" />
                 </div>
 
