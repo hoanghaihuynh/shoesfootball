@@ -93,7 +93,6 @@ include_once('./components/slider.php');
                                 </a>
                             </form>
                             <div class="rating">
-
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
@@ -101,17 +100,6 @@ include_once('./components/slider.php');
                                 <i class="fa fa-star"></i>
                             </div>
                             <h5><?php echo number_format($row1['price']) ?> VNĐ</h5>
-                            <!-- <div class="product__color__select">
-                            <label for="pc-1">
-                                <input type="radio" id="pc-1">
-                            </label>
-                            <label class="active black" for="pc-2">
-                                <input type="radio" id="pc-2">
-                            </label>
-                            <label class="grey" for="pc-3">
-                                <input type="radio" id="pc-3">
-                            </label>
-                        </div> -->
                         </div>
                         <a href="<?php echo $site_domain ?>/shop-details.php?id=<?php echo $row1['id'] ?>"
                             style="color:blue;">Xem chi

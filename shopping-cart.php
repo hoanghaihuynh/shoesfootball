@@ -5,7 +5,7 @@ include_once('./components/nav.php');
 
 $email = $_SESSION["user"];
 $magiamgia = isset($_GET["magiamgia"]) ? $_GET["magiamgia"] : null;
-$disableBuyButton = false; // Mặc định là false, tức là nút mua hàng không bị khóa
+// $disableBuyButton = true; // Mặc định là false, tức là nút mua hàng không bị khóa
 $error_message = "";
 
 // Lấy dữ liệu giỏ hàng
@@ -52,7 +52,7 @@ $query = $conn->query("SELECT * FROM `cart` WHERE `email` = '$email'");
                                 $totalPrice = 0;
                                 while ($row1 = $query->fetch(PDO::FETCH_ASSOC)) {
                                     $totalPrice += $row1["price"] * $row1["soluong"];
-                                    ?>
+                                ?>
                                     <tr id="product-<?php echo $row1['id']; ?>">
                                         <td class="product__cart__item">
                                             <div class="product__cart__item__pic">
@@ -65,10 +65,10 @@ $query = $conn->query("SELECT * FROM `cart` WHERE `email` = '$email'");
                                         </td>
                                         <td class="quantity__item">
                                             <div class="quantity">
-                                                <input type="number" name="quantities[<?php echo $row1['id']; ?>]" 
-                                                       value="<?php echo $row1["soluong"]; ?>" 
-                                                       min="1" max="99" class="quantity-input" style="width: 60px;" 
-                                                       data-id="<?php echo $row1['id']; ?>" data-price="<?php echo $row1['price']; ?>" />
+                                                <input type="number" name="quantities[<?php echo $row1['id']; ?>]"
+                                                    value="<?php echo $row1["soluong"]; ?>"
+                                                    min="1" max="99" class="quantity-input" style="width: 60px;"
+                                                    data-id="<?php echo $row1['id']; ?>" data-price="<?php echo $row1['price']; ?>" />
                                             </div>
                                         </td>
                                         <td class="cart__price" id="price-<?php echo $row1['id']; ?>">
@@ -108,8 +108,8 @@ $query = $conn->query("SELECT * FROM `cart` WHERE `email` = '$email'");
                     <h6>Tổng Tiền Giỏ Hàng</h6>
                     <ul>
                         <li class="last">Tổng <span id="finalTotal">
-                            <?php echo number_format($totalPrice); ?> VNĐ
-                        </span></li>
+                                <?php echo number_format($totalPrice); ?> VNĐ
+                            </span></li>
                     </ul>
                     <a href="checkout.php?magiamgia=<?php echo $magiamgia; ?>" class="primary-btn">Mua hàng</a>
                 </div>
@@ -121,63 +121,63 @@ $query = $conn->query("SELECT * FROM `cart` WHERE `email` = '$email'");
 <!-- Shopping Cart Section End -->
 
 <!-- Footer Section Begin -->
-<?php include_once('./components/footer.php'); ?> 
+<?php include_once('./components/footer.php'); ?>
 
 <!-- JavaScript to handle AJAX for updating the cart -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-$(document).ready(function() {
-    // Xử lý form cập nhật giỏ hàng
-    $("#updateCartForm").on("submit", function(event) {
-        event.preventDefault(); // Ngừng form gửi mặc định
+    $(document).ready(function() {
+        // Xử lý form cập nhật giỏ hàng
+        $("#updateCartForm").on("submit", function(event) {
+            event.preventDefault(); // Ngừng form gửi mặc định
 
-        // Lấy dữ liệu từ form
-        var formData = $(this).serialize();
+            // Lấy dữ liệu từ form
+            var formData = $(this).serialize();
 
-        // Gửi yêu cầu AJAX
-        $.ajax({
-            url: `<?php echo $site_domain?>/config/update_cart.php`, // Tạo file PHP xử lý cập nhật
-            type: "POST",
-            data: formData,
-            success: function(response) {
-                // Cập nhật giao diện nếu thành công
-                alert("Giỏ hàng đã được cập nhật!");
-                location.reload(); // Reload trang để cập nhật
-            },
-            error: function(xhr, status, error) {
-                // Hiển thị lỗi nếu có
-                alert("Có lỗi xảy ra. Vui lòng thử lại.");
-            }
+            // Gửi yêu cầu AJAX
+            $.ajax({
+                url: `<?php echo $site_domain ?>/config/update_cart.php`, // Tạo file PHP xử lý cập nhật
+                type: "POST",
+                data: formData,
+                success: function(response) {
+                    // Cập nhật giao diện nếu thành công
+                    alert("Giỏ hàng đã được cập nhật!");
+                    location.reload(); // Reload trang để cập nhật
+                },
+                error: function(xhr, status, error) {
+                    // Hiển thị lỗi nếu có
+                    alert("Có lỗi xảy ra. Vui lòng thử lại.");
+                }
+            });
         });
     });
-});
-$(document).ready(function() {
-    // Khi thay đổi số lượng sản phẩm
-    $(".quantity-input").on("input", function() {
-        var productId = $(this).data("id");
-        var price = $(this).data("price");
-        var quantity = $(this).val();
-        var totalPriceForProduct = price * quantity;
-        
-        // Cập nhật giá sản phẩm
-        $("#price-" + productId).text(number_format(totalPriceForProduct) + " VNĐ");
-        
-        // Tính tổng tiền lại
-        var newTotalPrice = 0;
-        $(".quantity-input").each(function() {
+    $(document).ready(function() {
+        // Khi thay đổi số lượng sản phẩm
+        $(".quantity-input").on("input", function() {
             var productId = $(this).data("id");
             var price = $(this).data("price");
             var quantity = $(this).val();
-            newTotalPrice += price * quantity;
+            var totalPriceForProduct = price * quantity;
+
+            // Cập nhật giá sản phẩm
+            $("#price-" + productId).text(number_format(totalPriceForProduct) + " VNĐ");
+
+            // Tính tổng tiền lại
+            var newTotalPrice = 0;
+            $(".quantity-input").each(function() {
+                var productId = $(this).data("id");
+                var price = $(this).data("price");
+                var quantity = $(this).val();
+                newTotalPrice += price * quantity;
+            });
+
+            // Hiển thị tổng tiền mới
+            $("#finalTotal").text(number_format(newTotalPrice) + " VNĐ");
         });
 
-        // Hiển thị tổng tiền mới
-        $("#finalTotal").text(number_format(newTotalPrice) + " VNĐ");
+        // Hàm định dạng số tiền
+        function number_format(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
     });
-
-    // Hàm định dạng số tiền
-    function number_format(num) {
-        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
-});
 </script>

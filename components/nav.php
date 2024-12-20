@@ -224,7 +224,7 @@ $users_quyen = $users['phanquyen'];
                                         <i style="font-size: 24px;" class="fa fa-user-circle-o"></i>
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">user@gmail.com</a></li>
+                                        <li><a class="dropdown-item" href="#"><?php echo $_SESSION["user"] ?></a></li>
                                         <?php if ($users_quyen == 99) { ?>
                                             <li><a class="dropdown-item" href="<?php echo $site_domain ?>admin/index.php">Trang Quản Trị</a></li>
                                         <?php } ?>
@@ -263,35 +263,35 @@ $users_quyen = $users['phanquyen'];
                                 <img src="img/icon/cart.png" alt="">
                                 <span>
                                     <?php
-                                        // Lấy email người dùng từ session
-                                        $email = $_SESSION["user"];
-                                        $cartQty = 0;
-                                        
-                                        // Truy vấn giỏ hàng của người dùng
-                                        $query = $conn->query("SELECT * FROM `cart` WHERE `email` = '$email'");
-                                        
-                                        // Duyệt qua các sản phẩm trong giỏ hàng và tính số lượng sản phẩm
-                                        while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
-                                            $cartQty++; // Tăng số lượng sản phẩm trong giỏ hàng
-                                        }
+                                    // Lấy email người dùng từ session
+                                    $email = $_SESSION["user"];
+                                    $cartQty = 0;
 
-                                        echo $cartQty; // Hiển thị số lượng sản phẩm
+                                    // Truy vấn giỏ hàng của người dùng
+                                    $query = $conn->query("SELECT * FROM `cart` WHERE `email` = '$email'");
+
+                                    // Duyệt qua các sản phẩm trong giỏ hàng và tính số lượng sản phẩm
+                                    while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+                                        $cartQty++; // Tăng số lượng sản phẩm trong giỏ hàng
+                                    }
+
+                                    echo $cartQty; // Hiển thị số lượng sản phẩm
                                     ?>
                                 </span>
                             </a>
                             <div class="price">
                                 <?php
-                                    // Khởi tạo biến tính tổng tiền giỏ hàng
-                                    $totalMoney = 0;
-                                    
-                                    // Duyệt qua các sản phẩm trong giỏ hàng để tính tổng tiền
-                                    $query = $conn->query("SELECT * FROM `cart` WHERE `email` = '$email'");
-                                    while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
-                                        $totalMoney += $row['price'] * $row['soluong']; // Giá sản phẩm nhân với số lượng
-                                    }
+                                // Khởi tạo biến tính tổng tiền giỏ hàng
+                                $totalMoney = 0;
 
-                                    // Định dạng lại số tiền
-                                    echo number_format($totalMoney, 0, ',', '.') . " VNĐ"; // Hiển thị tổng tiền
+                                // Duyệt qua các sản phẩm trong giỏ hàng để tính tổng tiền
+                                $query = $conn->query("SELECT * FROM `cart` WHERE `email` = '$email'");
+                                while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+                                    $totalMoney += $row['price'] * $row['soluong']; // Giá sản phẩm nhân với số lượng
+                                }
+
+                                // Định dạng lại số tiền
+                                echo number_format($totalMoney, 0, ',', '.') . " VNĐ"; // Hiển thị tổng tiền
                                 ?>
                             </div>
                         </div>

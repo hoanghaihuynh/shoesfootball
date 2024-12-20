@@ -145,7 +145,7 @@ $id = $_GET['updateid'];
                 <div class="form-group" style="width:400px">
                     <label class="form-label" for="customFile">Ảnh Sản Phẩm</label>
                     <input type="hidden" name="size" value="100000000">
-                    <input type="file" class="form-control" name="image" id="image" value="" required />
+                    <input type="file" class="form-control" name="image" id="image" value="" />
                     <img style="width:100px;height:100px" src="<?php echo '' . $row1["image"] ?>" />
 
                 </div>

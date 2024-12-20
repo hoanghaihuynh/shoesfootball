@@ -114,13 +114,13 @@ include_once('../navigation.php');
                     <?php } ?>
                 </select> -->
                 <select id="subcategories" name="subcategory_id" class="form-control" fdprocessedid="b8z8t2">
-                    <?php 
-                                $query = $conn->query("SELECT * FROM `danhmuc`");
-                                while($row11 = $query->fetch(PDO::FETCH_ASSOC)){ 
-                                    //get danh sách danh mục
-                                ?>
-                    <option value="<?php echo ''.$row11["lienket"]?>"><?php echo ''.$row11["tendanhmuc"]?></option>
-                    <?php }?>
+                    <?php
+                    $query = $conn->query("SELECT * FROM `danhmuc`");
+                    while ($row11 = $query->fetch(PDO::FETCH_ASSOC)) {
+                        //get danh sách danh mục
+                    ?>
+                        <option value="<?php echo '' . $row11["lienket"] ?>"><?php echo '' . $row11["tendanhmuc"] ?></option>
+                    <?php } ?>
                 </select>
             </div>
             <br>
@@ -138,7 +138,7 @@ include_once('../navigation.php');
             <div class="form-group" style="width:400px">
                 <label class="form-label" for="customFile">Ảnh Sản Phẩm</label>
                 <input type="hidden" name="size" value="100000000">
-                <input type="file" class="form-control" name="image" id="image" value="" required />
+                <input type="file" class="form-control" name="image" id="image" value="" />
             </div>
 
     </div>
@@ -277,7 +277,7 @@ if (isset($_POST['submit'])) {
     $sotiengiamgia     = $_POST['sotiengiamgia'];
     $chitiet   = $_POST['chitiet'];
     $sale      = $_POST['sale'];
-    $slhienco      = $_POST['slhienco'];
+    // $slhienco      = $_POST['slhienco'];
     $signi = $_POST['visibility'];
     $select = $_POST['subcategory_id'];
 

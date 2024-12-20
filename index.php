@@ -24,13 +24,9 @@ $client->setClientSecret($clientSecret);
 $client->setRedirectUri($redirectUri);
 $client->addScope("email");
 $client->addScope("profile");
-echo '<script>alert("Đăng nhập thành công1!")</script>';
-
-
 
 // authenticate code from Google OAuth Flow
 if (isset($_GET['code'])) {
-    echo '<script>alert("Đăng nhập thành công2!")</script>';
     // $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
     $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
     if (isset($token['error'])) {
