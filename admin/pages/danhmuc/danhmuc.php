@@ -1,4 +1,5 @@
 <?php
+ob_start();
 require_once('../../../config/database.php');
 include_once('../header.php');
 include_once('../navigation.php');
@@ -139,20 +140,18 @@ include_once('../navigation.php');
 </html>
 <?php
 if (isset($_POST['submit'])) {
+    $title = $_POST['title'] ?? '';
+    $slug = $_POST['slug'] ?? '';
+    $select = $_POST['danhmucc'] ?? '';
 
-    $title   = $_POST['title'];
-    $slug      = $_POST['slug'];
-    $select = $_POST['danhmucc'];
-    // Thêm danh mục mới lên sql
-
-    $sql = "INSERT IGNORE INTO danhmuc (danhmucchinh,tendanhmuc,lienket) VALUES ('$select','$title','$slug')";
+    $sql = "INSERT IGNORE INTO danhmuc (danhmucchinh, tendanhmuc, lienket) VALUES ('$select', '$title', '$slug')";
     if ($conn->query($sql)) {
         echo '<script>alert("Bạn Đã Thêm Thành Công!");</script>';
-
-        header('Location: #');
+        exit;
     } else {
         echo '<script>alert("Bạn Đã Thêm Thất Bại!");</script>';
-        header('Location: #');
     }
 }
+
+ob_end_flush();
 ?>

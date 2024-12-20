@@ -104,7 +104,7 @@ include_once('../navigation.php');
             </div>
             <div class="form-group m-0">
                 <label class="control-label">Danh mục Chính</label>
-                <select id="subcategories" name="subcategory_id" class="form-control" fdprocessedid="b8z8t2">
+                <!-- <select id="subcategories" name="subcategory_id" class="form-control" fdprocessedid="b8z8t2">
                     <?php
                     $query = $conn->query("SELECT * FROM `danhmuc`");
                     while ($row1 = $query->fetch(PDO::FETCH_ASSOC)) {
@@ -112,6 +112,15 @@ include_once('../navigation.php');
                     ?>
                         <option value="<?php echo '' . $row1["danhmucchinh"] ?>"><?php echo '' . $row1["tendanhmuc"] ?></option>
                     <?php } ?>
+                </select> -->
+                <select id="subcategories" name="subcategory_id" class="form-control" fdprocessedid="b8z8t2">
+                    <?php 
+                                $query = $conn->query("SELECT * FROM `danhmuc`");
+                                while($row11 = $query->fetch(PDO::FETCH_ASSOC)){ 
+                                    //get danh sách danh mục
+                                ?>
+                    <option value="<?php echo ''.$row11["lienket"]?>"><?php echo ''.$row11["tendanhmuc"]?></option>
+                    <?php }?>
                 </select>
             </div>
             <br>
