@@ -4,6 +4,14 @@
   include_once('../navigation.php');
 $id = $_GET['updateid'];
 ?>
+<style>
+    .sidebar {
+        position: relative !important;
+    }
+    .main-panel {
+        margin-top :23px;
+    }
+</style>
 
         <!-- partial -->
 <div class="main-panel" style="padding:20px">

@@ -24,6 +24,7 @@
                                     <th style="width:10px">STT</th>
                                     <th>Tiêu đề</th>
                                     <th>Hình Ảnh</th>
+                                    
                                     <th>Chi tiết</th>
                                     <th>Xóa</th>
                                     <th>Sửa</th>
