@@ -8,8 +8,9 @@ $id = $_GET['updateid'];
     .sidebar {
         position: relative !important;
     }
+
     .main-panel {
-        margin-top :23px;
+        margin-top: 23px;
     }
 </style>
 

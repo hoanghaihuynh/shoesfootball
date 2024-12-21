@@ -75,14 +75,6 @@ include_once('../navigation.php');
                     fdprocessedid="c7g48i">
             </div>
 
-            <!-- <div class="form-group">
-                <label class="control-label">Số lượng hiện có</label>
-                <input type="text" class="form-control" name="slhienco" placeholder="Số lượng hiện có" value="" required
-                    fdprocessedid="c7g48i">
-            </div> -->
-
-
-
             <div class="form-group">
                 <div class="row">
                     <div class="col-sm-4 col-xs-12">

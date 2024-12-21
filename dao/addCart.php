@@ -43,12 +43,10 @@ window.location = '$site_domain/shopping-cart.php?magiamgia='
     }
   }
 }
-if (isset($_POST["xoaCart"])) {
+if (isset($_GET["xoaCart"])) {
   //xóa sản phẩm có id đã nhập trong giỏ hàng
-  $id = $_POST["xoaCart"];
-  $delete = "DELETE FROM `cart` WHERE `id` = '$id'";
+  $id = $_GET["xoaCart"];
+  $delete = "DELETE FROM cart WHERE id = '$id'";
   $conn->query($delete);
-  echo "<script>
-history.back();
-</script>";
+  echo "<script>history.back();</script>";
 }
